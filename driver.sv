@@ -27,7 +27,7 @@ class driver extends uvm_driver #(Item);
     virtual task drive_item(Item m_item);
         @(vif.cb);
             vif.cb.r_mode <= m_item.r_mode;
-            vif.cb.r_mode <= m_item.fp_X;
-            vif.cb.r_mode <= m_item.fp_Y;
+            vif.cb.fp_X <= m_item.fp_X;
+            vif.cb.fp_Y <= m_item.fp_Y;
     endtask
 endclass
