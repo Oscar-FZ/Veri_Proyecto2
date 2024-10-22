@@ -3,9 +3,9 @@ class Item extends uvm_sequence_item;
 
     //Inputs
     rand bit [2:0] r_mode;
-    rand shortreal fp_X, fp_Y;
+    rand bit [31:0] fp_X, fp_Y;
     //Outputs
-    shortreal [31:0] fp_Z; //Revisar ese tipo de dato
+    bit [31:0] fp_Z; //Revisar ese tipo de dato
     bit ovrf, udrf;
 
     //Registro de los atributos para usar las funciones de los macros de campo
