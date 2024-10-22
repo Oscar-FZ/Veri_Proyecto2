@@ -17,7 +17,7 @@ class scoreboard extends uvm_scoreboard;
 
     virtual function write(Item item);
         `uvm_info("SCBD", $sformatf("r mode=%0d X=%0f Y=%0f Z=%0f Overflow=%b Underflow=%b",
-            item.r_mode, item.fp_X, item.fp_Y, item.fp_Z, item.ovrf, item.udrf), UVM_LOW)
+            item.r_mode, $bitstoreal(item.fp_X), $bitstoreal(item.fp_Y), $bitstoreal(item.fp_Z), item.ovrf, item.udrf), UVM_LOW)
         
         //TODO Hacer checker
 
