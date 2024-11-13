@@ -7,7 +7,7 @@ class gen_item_seq extends uvm_sequence;
 
     int num = 1;
 
-    //constraint c1 {soft num inside {[10:50]};}
+    constraint c1 {soft num inside {[10:50]};}
 
     virtual task body();
         for (int i = 0; i < num; i++) begin
