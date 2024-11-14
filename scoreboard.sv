@@ -8,9 +8,15 @@ class scoreboard extends uvm_scoreboard;
     //TODO Definir variables que seran usadas para el checkeo
     shortreal exp_result;
     // Variables para la simulacion
+    // Signo
     bit fp_X_sign;
     bit fp_Y_sign;
     bit result_sign;
+
+    // Fraccion
+    bit [22:0] fp_X_frac;
+    bit [22:0] fp_Y_frac;
+    bit [47:0] frc_Z_full;
 
     uvm_analysis_imp #(Item, scoreboard) m_analysis_imp;
 
@@ -26,9 +32,13 @@ class scoreboard extends uvm_scoreboard;
         shortreal fp_Z_float = $bitstoshortreal(item.fp_Z);
 
         // Variables para simular la multiplicacion en punto flotante
+        // Para determinar el signo
         fp_X_sign = item.fp_X[31];
         fp_Y_sign = item.fp_Y[31];
-        
+
+        // Para hacer la multiplicacion fraccional
+        fp_X_frac = item.fp_X[22:0];
+        fp_Y_frac = item.fp_Y[22:0];
 
         `uvm_info("SCBD", $sformatf("r mode=%0d X=%e Y=%e Z=%e Overflow=%b Underflow=%b", 
         item.r_mode, fp_X_float, fp_Y_float, fp_Z_float, item.ovrf, item.udrf), UVM_LOW)
@@ -37,8 +47,11 @@ class scoreboard extends uvm_scoreboard;
         
         // 1. Determinar el signo
         result_sign = fp_X_sign ^ fp_Y_sign;
+        //`uvm_info("SCBD", $sformatf("result_sign=%b", result_sign), UVM_LOW) // Seems to be working
 
-        `uvm_info("SCBD", $sformatf("result_sign=%b", result_sign), UVM_LOW)
+        // 2. Multiplicador fraccional
+        frc_Z_full = {1'b1, fp_X_frac} * {1'b1, fp_Y_frac};
+        `uvm_info("SCBD", $sformatf("Mul frac=%b", frc_Z_full), UVM_LOW) // Seems to be working
 
     endfunction
 endclass
