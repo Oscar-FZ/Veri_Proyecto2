@@ -16,6 +16,9 @@ NaN representa valores inválidos como dividir entre 0
 - 011 -> Me fijo en el bit de signo para redondear pero al revés del caso 010
 - 100 -> Me fijo en el round bit para redondear
 
+## More useful diagrams
+![arquitectura dut](image-2.png)
 
+![normalizer](image-3.png)
 
 ### Remember to remove this when we are donezo
