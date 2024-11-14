@@ -35,7 +35,7 @@ class scoreboard extends uvm_scoreboard;
         
         case(item.r_mode) 
             3'b001: exp_result = fp_X_float * fp_Y_float;
-            default: exp_result = 'bx
+            default: exp_result = 'bx;
         endcase
 
     endfunction
