@@ -29,5 +29,6 @@ class Item extends uvm_sequence_item;
 
     //Constraints
     //TODO No se como aleatorizar datos punto flotante xd
-    constraint c_rmode {r_mode inside{0, 1, 2, 3, 4};}
+    //constraint c_rmode {r_mode inside{0, 1, 2, 3, 4};}
+    constraint c_rmode {r_mode inside{1};} // Esto es para probar
 endclass
