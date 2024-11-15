@@ -134,6 +134,9 @@ class scoreboard extends uvm_scoreboard;
                 frc_Z = 'bx;
             end
         endcase
+    
+    `uvm_info("SCBD", $sformatf("fraccion=%h", frc_Z), UVM_LOW) // Seems to be working
+
     endfunction
 endclass
 
