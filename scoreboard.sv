@@ -30,6 +30,13 @@ class scoreboard extends uvm_scoreboard;
     bit [47:0] frc_Z_mux;
     bit [26:0] frc_Z_norm_o;
 
+    // Redondeador
+    bit [22:0] frc_Z;
+    bit [23:0] Z_data;
+    bit [23:0] Z_data_p;
+    bit round_bit;
+    bit guardVsticky;
+
     uvm_analysis_imp #(Item, scoreboard) m_analysis_imp;
 
     virtual function void build_phase(uvm_phase phase);
@@ -93,8 +100,40 @@ class scoreboard extends uvm_scoreboard;
         end
 
         frc_Z_norm_o = {frc_Z_norm, sticky_bit};
-        `uvm_info("SCBD", $sformatf("frc_Z_norm_o=%b", frc_Z_norm_o), UVM_LOW) // Seems to be working
+        //`uvm_info("SCBD", $sformatf("frc_Z_norm_o=%b", frc_Z_norm_o), UVM_LOW) // Seems to be working
 
+        // 5. Rounder
+        // Separar los bits en componentes
+        Z_data = frc_Z_norm_o[26:3];
+        Z_data_p = Z_data + 1;
+        round_bit = frc_Z_norm_o[2];
+        guardVsticky = (frc_Z_norm_o[1] | frc_Z_norm_o[0]);
+
+        case (item.r_mode)
+            3'b000: begin
+                frc_Z = 'bx;
+            end
+
+            3'b001: begin
+                frc_Z = Z_data;
+            end
+
+            3'b010: begin
+                frc_Z = 'bx;
+            end
+
+            3'b011: begin
+                frc_Z = 'bx;
+            end
+
+            3'b100: begin
+                frc_Z = 'bx;
+            end
+
+            default: begin
+                frc_Z = 'bx;
+            end
+        endcase
     endfunction
 endclass
 
