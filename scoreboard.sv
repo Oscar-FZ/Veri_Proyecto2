@@ -38,6 +38,15 @@ class scoreboard extends uvm_scoreboard;
     bit guardVsticky;
     bit norm_r;
 
+    // Exponente
+    bit [7:0] fp_X_exp;
+    bit [7:0] fp_Y_exp;
+    bit [7:0] exp_Z;
+    bit norm;
+    bit [8:0] status;
+    bit underflow;
+    bit overflow;
+
     uvm_analysis_imp #(Item, scoreboard) m_analysis_imp;
 
     virtual function void build_phase(uvm_phase phase);
@@ -74,7 +83,7 @@ class scoreboard extends uvm_scoreboard;
         //`uvm_info("SCBD", $sformatf("result_sign=%b", result_sign), UVM_LOW) // Seems to be working
 
         // 2. Determinar el exponente 
-        exp_Z = ((fp_X_exp + fp_Y_exp) - 127);
+        //exp_Z = ((fp_X_exp + fp_Y_exp) - 127);
         //`uvm_info("SCBD", $sformatf("Exponente=%b", exp_Z), UVM_LOW) // Seems to be working
 
         // 3. Multiplicador fraccional
@@ -175,7 +184,39 @@ class scoreboard extends uvm_scoreboard;
             end
         endcase
     
-    //`uvm_info("SCBD", $sformatf("fraccion=%h", frc_Z), UVM_LOW) // Seems to be working
+        //`uvm_info("SCBD", $sformatf("fraccion=%h", frc_Z), UVM_LOW) // Seems to be working
+
+        //Biased exponent adder
+        // Check for over/underflow
+
+        norm = (norm_n | norm_r);
+        if (norm == 0) begin
+            exp_Z = ((fp_X_exp + fp_Y_exp) - 127);
+            if (fp_X_exp + fp_Y_exp <= 127) begin
+                underflow = 1;
+            end
+            else if (fp_X_exp + fp_Y_exp >= 255 + 127) begin
+                overflow = 1;
+            end
+            else begin
+                underflow = 0;
+                overflow = 0;
+            end
+        end
+        else begin
+            exp_Z = ((fp_X_exp + fp_Y_exp) - 126);
+            if (fp_X_exp + fp_Y_exp <= 126) begin
+                underflow = 1;
+            end
+            else if (fp_X_exp + fp_Y_exp >= 255 + 126) begin
+                overflow = 1;
+            end
+            else begin
+                underflow = 0;
+                overflow = 0;
+            end
+        end
+        `uvm_info("SCBD", $sformatf("underflow=%b, overflow=%b", underflow, overflow), UVM_LOW) // Seems to be working
 
     endfunction
 endclass
