@@ -216,7 +216,7 @@ class scoreboard extends uvm_scoreboard;
                 overflow = 0;
             end
         end
-        `uvm_info("SCBD", $sformatf("underflow=%b, overflow=%b", underflow, overflow), UVM_LOW) // Seems to be working
+        `uvm_info("SCBD", $sformatf("norm=%b, underflow=%b, overflow=%b", norm, underflow, overflow), UVM_LOW) // Seems to be working
 
     endfunction
 endclass
