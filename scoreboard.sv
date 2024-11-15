@@ -111,7 +111,20 @@ class scoreboard extends uvm_scoreboard;
 
         case (item.r_mode)
             3'b000: begin
-                frc_Z = 'bx;
+                if (round_bit == 0) begin
+                    frc_Z = Z_data;
+                end
+                else if (round_bit && guardVsticky == 1) begin
+                    frc_Z = Z_data_p;
+                end
+                else if (round_bit == 1 & guardVsticky == 0) begin
+                    if (z_data[0] == 0) begin
+                        frc_Z = Z_data;
+                    end
+                    else begin
+                        frc_Z = Z_data_p;
+                    end
+                end
             end
 
             3'b001: begin
@@ -119,15 +132,30 @@ class scoreboard extends uvm_scoreboard;
             end
 
             3'b010: begin
-                frc_Z = 'bx;
+                if (result_sign == 0) begin
+                    frc_Z = Z_data;
+                end
+                else begin
+                    frc_Z = Z_data_p;
+                end
             end
 
             3'b011: begin
-                frc_Z = 'bx;
+                if (result_sign == 1) begin
+                    frc_Z = Z_data;
+                end
+                else begin
+                    frc_Z = Z_data_p;
+                end
             end
 
             3'b100: begin
-                frc_Z = 'bx;
+                if (round_bit == 0) begin
+                    frc_Z = Z_data;
+                end
+                else begin
+                    frc_Z = Z_data_p;
+                end
             end
 
             default: begin
@@ -135,7 +163,7 @@ class scoreboard extends uvm_scoreboard;
             end
         endcase
     
-    `uvm_info("SCBD", $sformatf("fraccion=%h", frc_Z), UVM_LOW) // Seems to be working
+    //`uvm_info("SCBD", $sformatf("fraccion=%h", frc_Z), UVM_LOW) // Seems to be working
 
     endfunction
 endclass
