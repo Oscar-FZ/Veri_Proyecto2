@@ -1,0 +1,424 @@
+#######################################################################################
+# log primitive debug message of FSDB dumping                                         #
+# This is for R&D to analyze when there are issues happening when FSDB dump           #
+#######################################################################################
+ANF: vcsd_get_serial_mode_status('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vcsd_get_serial_mode_status')
+ANF: vcsd_enable_sva_success_callback('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vcsd_enable_sva_success_callback')
+ANF: vcsd_disable_sva_success_callback('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vcsd_disable_sva_success_callback')
+ANF: vcsd_get_power_scope_name('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vcsd_get_power_scope_name')
+ANF: vcsd_begin_no_value_var_info('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vcsd_begin_no_value_var_info')
+ANF: vcsd_end_no_value_var_info('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vcsd_end_no_value_var_info')
+ANF: vcsd_remove_xprop_merge_mode_callback('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vcsd_remove_xprop_merge_mode_callback')
+ANF: vhpi_get_cb_info('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhpi_get_cb_info')
+ANF: vhpi_free_handle('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhpi_free_handle')
+ANF: vhpi_fetch_vcsd_handle('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhpi_fetch_vcsd_handle')
+ANF: vhpi_fetch_vpi_handle('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhpi_fetch_vpi_handle')
+ANF: vhpi_has_verilog_parent('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhpi_has_verilog_parent')
+ANF: vhpi_is_verilog_scope('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhpi_is_verilog_scope')
+ANF: scsd_xprop_is_enabled('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: scsd_xprop_is_enabled')
+ANF: scsd_xprop_sig_is_promoted('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: scsd_xprop_sig_is_promoted')
+ANF: scsd_xprop_int_xvalue('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: scsd_xprop_int_xvalue')
+ANF: scsd_xprop_bool_xvalue('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: scsd_xprop_bool_xvalue')
+ANF: scsd_xprop_enum_xvalue('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: scsd_xprop_enum_xvalue')
+ANF: scsd_xprop_register_merge_mode_cb('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: scsd_xprop_register_merge_mode_cb')
+ANF: scsd_xprop_delete_merge_mode_cb('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: scsd_xprop_delete_merge_mode_cb')
+ANF: scsd_xprop_get_merge_mode('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: scsd_xprop_get_merge_mode')
+ANF: scsd_thread_get_info('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: scsd_thread_get_info')
+ANF: scsd_thread_vc_init('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: scsd_thread_vc_init')
+ANF: scsd_master_set_delta_sync_cbk('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: scsd_master_set_delta_sync_cbk')
+ANF: scsd_fgp_get_fsdb_cores('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: scsd_fgp_get_fsdb_cores')
+ANF: vhdi_dt_get_type('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_dt_get_type')
+ANF: vhdi_dt_get_key('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_dt_get_key')
+ANF: vhdi_dt_get_vhdl_enum_info('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_dt_get_vhdl_enum_info')
+ANF: vhdi_dt_get_vhdl_physical_info('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_dt_get_vhdl_physical_info')
+ANF: vhdi_dt_get_vhdl_array_info('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_dt_get_vhdl_array_info')
+ANF: vhdi_dt_get_vhdl_record_info('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_dt_get_vhdl_record_info')
+ANF: vhdi_def_traverse_module('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_def_traverse_module')
+ANF: vhdi_def_traverse_scope('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_def_traverse_scope')
+ANF: vhdi_def_traverse_variable('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_def_traverse_variable')
+ANF: vhdi_def_get_module_id_by_vhpi('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_def_get_module_id_by_vhpi')
+ANF: vhdi_def_get_handle_by_module_id('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_def_get_handle_by_module_id')
+ANF: vhdi_def_get_variable_info_by_vhpi('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_def_get_variable_info_by_vhpi')
+ANF: vhdi_def_free('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_def_free')
+ANF: vhdi_ist_traverse_scope('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_ist_traverse_scope')
+ANF: vhdi_ist_traverse_variable('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_ist_traverse_variable')
+ANF: vhdi_ist_convert_by_vhpi('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_ist_convert_by_vhpi')
+ANF: vhdi_ist_clone('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_ist_clone')
+ANF: vhdi_ist_free('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_ist_free')
+ANF: vhdi_ist_hash_key('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_ist_hash_key')
+ANF: vhdi_ist_compare('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_ist_compare')
+ANF: vhdi_ist_get_value_addr('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_ist_get_value_addr')
+ANF: vhdi_set_scsd_callback('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_set_scsd_callback')
+ANF: vhdi_cbk_set_force_callback('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_cbk_set_force_callback')
+ANF: vhdi_trigger_init_force('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_trigger_init_force')
+ANF: vhdi_ist_check_scsd_callback('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_ist_check_scsd_callback')
+ANF: vhdi_ist_add_scsd_callback('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_ist_add_scsd_callback')
+ANF: vhdi_ist_remove_scsd_callback('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_ist_remove_scsd_callback')
+ANF: vhdi_ist_get_scsd_user_data('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_ist_get_scsd_user_data')
+ANF: vhdi_add_time_change_callback('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_add_time_change_callback')
+ANF: vhdi_get_real_value_by_value_addr('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_get_real_value_by_value_addr')
+ANF: vhdi_get_64_value_by_value_addr('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_get_64_value_by_value_addr')
+ANF: vhdi_xprop_inst_is_promoted('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_xprop_inst_is_promoted')
+ANF: vdi_ist_convert_by_vhdi('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vdi_ist_convert_by_vhdi')
+ANF: vhdi_ist_get_module_id('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_ist_get_module_id')
+ANF: vhdi_refine_foreign_scope_type('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_refine_foreign_scope_type')
+ANF: vhdi_flush_callback('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_flush_callback')
+ANF: vhdi_set_orig_name('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_set_orig_name')
+ANF: vhdi_set_dump_pt('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_set_dump_pt')
+ANF: vhdi_get_fsdb_option('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_get_fsdb_option')
+ANF: vhdi_fgp_get_mode('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_fgp_get_mode')
+ANF: vhdi_node_register_composite_var('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_node_register_composite_var')
+ANF: vhdi_node_analysis('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_node_analysis')
+ANF: vhdi_node_id('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_node_id')
+ANF: vhdi_node_ist_check_scsd_callback('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_node_ist_check_scsd_callback')
+ANF: vhdi_node_ist_add_scsd_callback('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_node_ist_add_scsd_callback')
+ANF: vhdi_node_ist_get_value_addr('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_node_ist_get_value_addr')
+ANF: vhdi_enc_def_traverse_module('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_enc_def_traverse_module')
+ANF: vhdi_enc_def_traverse_scope('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_enc_def_traverse_scope')
+ANF: vhdi_enc_def_traverse_variable('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_enc_def_traverse_variable')
+ANF: vhdi_enc_ist_traverse_scope('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_enc_ist_traverse_scope')
+ANF: vhdi_enc_ist_traverse_variable('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_enc_ist_traverse_variable')
+ANF: vhdi_enc_ist_get_module_id('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_enc_ist_get_module_id')
+ANF: vhdi_enc_def_get_handle_by_module_id('/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida: undefined symbol: vhdi_enc_def_get_handle_by_module_id')
+VCS compile option:
+ option[0]: /mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida
+ option[1]: -cm
+ option[2]: line+tgl+cond+fsm+branch+assert
+ option[3]: +UVM_VERBOSITY=UVM_LOW
+ option[4]: +UVM_TESTNAME=test_fpmul
+ option[5]: [B+ntb_random_seed=1
+ option[6]: -sml=verdi
+ option[7]: +UVM_VERDI_TRACE=UVM_AWARE
+ option[8]: +fsdb+gate=off
+ option[9]: -ucli2Proc
+ option[10]: -ucli
+ option[11]: -l
+ option[12]: /mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/verdiLog/sim.log
+ option[13]: /mnt/vol_NFS_rh003/tools/vcs/R-2020.12-SP2/linux64/bin/vcs1
+ option[14]: -Mcc=gcc
+ option[15]: -Mcplusplus=g++
+ option[16]: -Masflags=
+ option[17]: -Mcfl= -pipe -DVCSMX -DUVM_DPI_DO_TYPE_CHECK -fPIC -O -I/mnt/vol_NFS_rh003/tools/vcs/R-2020.12-SP2/include 
+ option[18]: -Mxllcflags=
+ option[19]: -Mxcflags= -pipe -DVCSMX -DUVM_DPI_DO_TYPE_CHECK -fPIC -I/mnt/vol_NFS_rh003/tools/vcs/R-2020.12-SP2/include
+ option[20]: -Mldflags= -rdynamic 
+ option[21]: -Mout=salida
+ option[22]: -Mamsrun=
+ option[23]: -Mvcsaceobjs=
+ option[24]: -Mobjects= /mnt/vol_NFS_rh003/tools/vcs/R-2020.12-SP2/linux64/lib/libvirsim.so /mnt/vol_NFS_rh003/tools/vcs/R-2020.12-SP2/linux64/lib/liberrorinf.so /mnt/vol_NFS_rh003/tools/vcs/R-2020.12-SP2/linux64/lib/libsnpsmalloc.so /mnt/vol_NFS_rh003/tools/vcs/R-2020.12-SP2/linux64/lib/libvfs.so 
+ option[25]: -Mexternalobj=
+ option[26]: -Msaverestoreobj=/mnt/vol_NFS_rh003/tools/vcs/R-2020.12-SP2/linux64/lib/vcs_save_restore_new.o
+ option[27]: -Mcrt0=
+ option[28]: -Mcrtn=
+ option[29]: -Mcsrc=/mnt/vol_NFS_rh003/tools/vcs/R-2020.12-SP2/etc/uvm-1.2/dpi/uvm_dpi.cc 
+ option[30]: -Mupdate
+ option[31]: -Msyslibs=-ldl 
+ option[32]: -l
+ option[33]: log_test
+ option[34]: +define+UVM_VCS_RECORD
+ option[35]: +incdir+/mnt/vol_NFS_rh003/tools/vcs/R-2020.12-SP2/etc/uvm-1.2/vcs
+ option[36]: /mnt/vol_NFS_rh003/tools/vcs/R-2020.12-SP2/etc/uvm-1.2/uvm_pkg.sv
+ option[37]: /mnt/vol_NFS_rh003/tools/vcs/R-2020.12-SP2/etc/uvm-1.2/vcs/uvm_custom_install_vcs_recorder.sv
+ option[38]: -o
+ option[39]: salida
+ option[40]: -full64
+ option[41]: -debug_access+all+bc
+ option[42]: +vpi
+ option[43]: +vcsd
+ option[44]: +memcbk
+ option[45]: +itf+/mnt/vol_NFS_rh003/tools/vcs/R-2020.12-SP2/linux64/lib/vcsdp.tab
+ option[46]: -debug_region+cell
+ option[47]: -kdb
+ option[48]: -Xufe=2steps
+ option[49]: -lca
+ option[50]: +lint=TFIPC-L
+ option[51]: -ntb_opts
+ option[52]: uvm-1.2
+ option[53]: +incdir+/mnt/vol_NFS_rh003/tools/vcs/R-2020.12-SP2/etc/uvm-1.2/
+ option[54]: -picarchive
+ option[55]: -sverilog
+ option[56]: -gen_obj
+ option[57]: test_bench.sv
+Chronologic Simulation VCS Release R-2020.12-SP2_Full64
+Linux 4.18.0-553.27.1.el8_10.x86_64 #1 SMP Fri Oct 18 06:18:15 EDT 2024 x86_64
+CPU cores: 16
+Limit information:
+======================================
+cputime		unlimited
+filesize		unlimited
+datasize		unlimited
+stacksize		8250 kbytes
+coredumpsize		0 kbytes
+memoryuse		unlimited
+vmemoryuse		unlimited
+descriptors		262144
+memorylocked		64 kbytes
+maxproc		95055
+======================================
+(Special)Runtime environment variables:
+
+Runtime environment variables:
+UVM_HOME=/mnt/vol_NFS_rh003/tools/vcs/R-2020.12-SP2/etc/uvm-1.2
+LC_ALL=C
+LD_LIBRARY_PATH=
+LS_COLORS=rs=0:di=38;5;33:ln=38;5;51:mh=00:pi=40;38;5;11:so=38;5;13:do=38;5;5:bd=48;5;232;38;5;11:cd=48;5;232;38;5;3:or=48;5;232;38;5;9:mi=01;05;37;41:su=48;5;196;38;5;15:sg=48;5;11;38;5;16:ca=48;5;196;38;5;226:tw=48;5;10;38;5;16:ow=48;5;10;38;5;21:st=48;5;21;38;5;15:ex=38;5;40:*.tar=38;5;9:*.tgz=38;5;9:*.arc=38;5;9:*.arj=38;5;9:*.taz=38;5;9:*.lha=38;5;9:*.lz4=38;5;9:*.lzh=38;5;9:*.lzma=38;5;9:*.tlz=38;5;9:*.txz=38;5;9:*.tzo=38;5;9:*.t7z=38;5;9:*.zip=38;5;9:*.z=38;5;9:*.dz=38;5;9:*.gz=38;5;9:*.lrz=38;5;9:*.lz=38;5;9:*.lzo=38;5;9:*.xz=38;5;9:*.zst=38;5;9:*.tzst=38;5;9:*.bz2=38;5;9:*.bz=38;5;9:*.tbz=38;5;9:*.tbz2=38;5;9:*.tz=38;5;9:*.deb=38;5;9:*.rpm=38;5;9:*.jar=38;5;9:*.war=38;5;9:*.ear=38;5;9:*.sar=38;5;9:*.rar=38;5;9:*.alz=38;5;9:*.ace=38;5;9:*.zoo=38;5;9:*.cpio=38;5;9:*.7z=38;5;9:*.rz=38;5;9:*.cab=38;5;9:*.wim=38;5;9:*.swm=38;5;9:*.dwm=38;5;9:*.esd=38;5;9:*.jpg=38;5;13:*.jpeg=38;5;13:*.mjpg=38;5;13:*.mjpeg=38;5;13:*.gif=38;5;13:*.bmp=38;5;13:*.pbm=38;5;13:*.pgm=38;5;13:*.ppm=38;5;13:*.tga=38;5;13:*.xbm=38;5;13:*.xpm=38;5;13:*.tif=38;5;13:*.tiff=38;5;13:*.png=38;5;13:*.svg=38;5;13:*.svgz=38;5;13:*.mng=38;5;13:*.pcx=38;5;13:*.mov=38;5;13:*.mpg=38;5;13:*.mpeg=38;5;13:*.m2v=38;5;13:*.mkv=38;5;13:*.webm=38;5;13:*.ogm=38;5;13:*.mp4=38;5;13:*.m4v=38;5;13:*.mp4v=38;5;13:*.vob=38;5;13:*.qt=38;5;13:*.nuv=38;5;13:*.wmv=38;5;13:*.asf=38;5;13:*.rm=38;5;13:*.rmvb=38;5;13:*.flc=38;5;13:*.avi=38;5;13:*.fli=38;5;13:*.flv=38;5;13:*.gl=38;5;13:*.dl=38;5;13:*.xcf=38;5;13:*.xwd=38;5;13:*.yuv=38;5;13:*.cgm=38;5;13:*.emf=38;5;13:*.ogv=38;5;13:*.ogx=38;5;13:*.aac=38;5;45:*.au=38;5;45:*.flac=38;5;45:*.m4a=38;5;45:*.mid=38;5;45:*.midi=38;5;45:*.mka=38;5;45:*.mp3=38;5;45:*.mpc=38;5;45:*.ogg=38;5;45:*.ra=38;5;45:*.wav=38;5;45:*.oga=38;5;45:*.opus=38;5;45:*.spx=38;5;45:*.xspf=38;5;45:
+SYS_INST_DIR=/mnt/vol_NFS_rh003/tools/verdi/R-2020.12-SP2
+SSH_CONNECTION=172.21.7.108 59941 172.21.8.8 22
+XDG_MENU_PREFIX=gnome-
+MODULES_RUN_QUARANTINE=LD_LIBRARY_PATH LD_PRELOAD
+LANG=C
+HISTCONTROL=ignoredups
+DISPLAY=:7
+VNCDESKTOP=redhatclon:7 (FERNANDEZ_ZUNIGA)
+HOSTNAME=redhatclon
+VCS_STACK_EXEC=true
+OLDPWD=/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA
+COLORTERM=truecolor
+SYNOPSYS_HOME=/mnt/vol_NFS_rh003/tools
+SNPSLMD_LICENSE_FILE=27020@172.21.99.41
+SSH_AUTH_SOCK=/tmp/ssh-xDlQF7eEVhJa/agent.234255
+which_declare=declare -f
+XDG_SESSION_ID=17
+NOVAS_SYNC_MOTIF_DISP=
+MODULES_CMD=/usr/share/Modules/libexec/modulecmd.tcl
+USER=FERNANDEZ_ZUNIGA
+VCS_EXEC_DONE=1
+GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/75937894_31a2_43d3_a587_8ea1027e4b18
+PWD=/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2
+SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+HOME=/home/FERNANDEZ_ZUNIGA
+SSH_AGENT_PID=234309
+SSH_CLIENT=172.21.7.108 59941 22
+VCS_PATHMAP_PRELOAD_DONE=1
+XNLSPATH=/mnt/vol_NFS_rh003/tools/verdi/R-2020.12-SP2/etc/access/nls
+XDG_DATA_DIRS=/home/FERNANDEZ_ZUNIGA/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+GJS_DEBUG_OUTPUT=stderr
+SPS_XFONT_PATH=/mnt/vol_NFS_rh003/tools/verdi/R-2020.12-SP2/XFont
+LOADEDMODULES=
+SSH_TTY=/dev/pts/5
+MAIL=/var/spool/mail/FERNANDEZ_ZUNIGA
+LD_NOVERSION=1
+QT_PLUGIN_PATH=/mnt/vol_NFS_rh003/tools/verdi/R-2020.12-SP2/platform/LINUXAMD64/lib/Qt/plugins
+SHELL=/bin/bash
+TERM=xterm-256color
+VTE_VERSION=5204
+QT_IM_MODULE=ibus
+XMODIFIERS=@im=none
+XDG_CURRENT_DESKTOP=GNOME
+GNOME_TERMINAL_SERVICE=:1.71
+VERDI_HOME=/mnt/vol_NFS_rh003/tools/verdi/R-2020.12-SP2
+SHLVL=4
+MANPATH=:
+SPS_FONT_PATH=/mnt/vol_NFS_rh003/tools/verdi/R-2020.12-SP2/font
+MODULEPATH=/etc/scl/modulefiles:/etc/scl/modulefiles:/usr/share/Modules/modulefiles:/etc/modulefiles:/usr/share/modulefiles
+VERDI_ORIGNAL_LD_LIBRARY_PATH=
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+LOGNAME=FERNANDEZ_ZUNIGA
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-0SuUimIin8,guid=4f6191ec4aa7d8aee605db66673659e5
+SPS_RGB_PATH=/mnt/vol_NFS_rh003/tools/verdi/R-2020.12-SP2/etc/rgb
+XDG_RUNTIME_DIR=/run/user/1141
+MODULEPATH_modshare=/usr/share/Modules/modulefiles:2:/etc/modulefiles:2:/usr/share/modulefiles:2
+MALLOC_ARENA_MAX=1
+PATH=/bin:/home/FERNANDEZ_ZUNIGA/.local/bin:/home/FERNANDEZ_ZUNIGA/bin:/usr/share/Modules/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/mnt/vol_NFS_rh003/tools/vcs/R-2020.12-SP2/bin:/mnt/vol_NFS_rh003/tools/verdi/R-2020.12-SP2/bin:/mnt/vol_NFS_rh003/Silicon_smart_install_Ronny/INSTALL_DIRECTORY/siliconsmart/T-2022.03-SP3-1/bin
+SNPSLMD_QUEUE=TRUE
+VCS_HOME=/mnt/vol_NFS_rh003/tools/vcs/R-2020.12-SP2
+MODULESHOME=/usr/share/Modules
+HISTSIZE=1000
+SNPS_SIM_DEFAULT_GUI=verdi
+GJS_DEBUG_TOPICS=JS ERROR;JS LOG
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/234255,unix/unix:/tmp/.ICE-unix/234255
+SYS_PROG_NAME=verdi
+NOVASHLPPATH=/mnt/vol_NFS_rh003/tools/verdi/R-2020.12-SP2/doc
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+BASH_FUNC_which%%=() {  ( alias;
+ eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@
+}
+BASH_FUNC_module%%=() {  _module_raw "$@" 2>&1
+}
+BASH_FUNC__module_raw%%=() {  unset _mlshdbg;
+ if [ "${MODULES_SILENT_SHELL_DEBUG:-0}" = '1' ]; then
+ case "$-" in 
+ *v*x*)
+ set +vx;
+ _mlshdbg='vx'
+ ;;
+ *v*)
+ set +v;
+ _mlshdbg='v'
+ ;;
+ *x*)
+ set +x;
+ _mlshdbg='x'
+ ;;
+ *)
+ _mlshdbg=''
+ ;;
+ esac;
+ fi;
+ unset _mlre _mlIFS;
+ if [ -n "${IFS+x}" ]; then
+ _mlIFS=$IFS;
+ fi;
+ IFS=' ';
+ for _mlv in ${MODULES_RUN_QUARANTINE:-};
+ do
+ if [ "${_mlv}" = "${_mlv##*[!A-Za-z0-9_]}" -a "${_mlv}" = "${_mlv#[0-9]}" ]; then
+ if [ -n "`eval 'echo ${'$_mlv'+x}'`" ]; then
+ _mlre="${_mlre:-}${_mlv}_modquar='`eval 'echo ${'$_mlv'}'`' ";
+ fi;
+ _mlrv="MODULES_RUNENV_${_mlv}";
+ _mlre="${_mlre:-}${_mlv}='`eval 'echo ${'$_mlrv':-}'`' ";
+ fi;
+ done;
+ if [ -n "${_mlre:-}" ]; then
+ eval `eval ${_mlre} /usr/bin/tclsh /usr/share/Modules/libexec/modulecmd.tcl bash '"$@"'`;
+ else
+ eval `/usr/bin/tclsh /usr/share/Modules/libexec/modulecmd.tcl bash "$@"`;
+ fi;
+ _mlstatus=$?;
+ if [ -n "${_mlIFS+x}" ]; then
+ IFS=$_mlIFS;
+ else
+ unset IFS;
+ fi;
+ unset _mlre _mlv _mlrv _mlIFS;
+ if [ -n "${_mlshdbg:-}" ]; then
+ set -$_mlshdbg;
+ fi;
+ unset _mlshdbg;
+ return $_mlstatus
+}
+BASH_FUNC_switchml%%=() {  typeset swfound=1;
+ if [ "${MODULES_USE_COMPAT_VERSION:-0}" = '1' ]; then
+ typeset swname='main';
+ if [ -e /usr/share/Modules/libexec/modulecmd.tcl ]; then
+ typeset swfound=0;
+ unset MODULES_USE_COMPAT_VERSION;
+ fi;
+ else
+ typeset swname='compatibility';
+ if [ -e /usr/share/Modules/libexec/modulecmd-compat ]; then
+ typeset swfound=0;
+ MODULES_USE_COMPAT_VERSION=1;
+ export MODULES_USE_COMPAT_VERSION;
+ fi;
+ fi;
+ if [ $swfound -eq 0 ]; then
+ echo "Switching to Modules $swname version";
+ source /usr/share/Modules/init/bash;
+ else
+ echo "Cannot switch to Modules $swname version, command not found";
+ return 1;
+ fi
+}
+BASH_FUNC_scl%%=() {  if [ "$1" = "load" -o "$1" = "unload" ]; then
+ eval "module $@";
+ else
+ /usr/bin/scl "$@";
+ fi
+}
+BASH_FUNC_ml%%=() {  module ml "$@"
+}
+PS_HWPC=OFF
+NOVAS_LC_ALL=C
+SIMV_DAIDIR_PATH=/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/./salida.daidir
+NOVAS_SIGNAL_BASE_EXTRACTION=1
+SIGNAL_BASE_EXTRACTION=1
+NOVAS_VERDI_SVTB_BETA=1
+VERDI_SVTB_BETA=1
+NOVAS_VERDI_SVTB_ALPHA=1
+VERDI_SVTB_ALPHA=1
+NOVAS_VERDI_TB_HT=1
+VERDI_TB_HT=1
+NOVAS_WAVE_REDRAW_ALLVC=1
+WAVE_REDRAW_ALLVC=1
+NOVAS_TCL_LIBRARY=/mnt/vol_NFS_rh003/tools/verdi/R-2020.12-SP2/etc/access/tcl86_library
+TCL_LIBRARY=/mnt/vol_NFS_rh003/tools/verdi/R-2020.12-SP2/etc/access/tcl86_library
+XKEYSYMDB=/mnt/vol_NFS_rh003/tools/verdi/R-2020.12-SP2/etc/access/XKeysymDB2.1
+XLOCALEDIR=/mnt/vol_NFS_rh003/tools/verdi/R-2020.12-SP2/etc/access/locale
+NOVAS_SIGNAL_BASED_BA=0
+SIGNAL_BASED_BA=0
+FSDB_FILE=/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/inter.fsdb
+VCS_UCLI_STDIN_BLOCKING=1
+FSDB_VHDL_PROTECTED=1
+FSDB_RD_IR_ENABLE=1
+FSDB_SVA_STATUS=1
+VCS_STOP_SAFE=1
+DVE_SIM_SELECT_LOOP=on
+FLEXLM_BORROWFILE=/home/FERNANDEZ_ZUNIGA/.redhatclon-borrow.txt
+Runtime command line arguments:
+argv[0]=/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida
+argv[1]=-cm
+argv[2]=line+tgl+cond+fsm+branch+assert
+argv[3]=+UVM_VERBOSITY=UVM_LOW
+argv[4]=+UVM_TESTNAME=test_fpmul
+argv[5]=[B+ntb_random_seed=1
+argv[6]=-sml=verdi
+argv[7]=+UVM_VERDI_TRACE=UVM_AWARE
+argv[8]=+fsdb+gate=off
+argv[9]=-ucli2Proc
+argv[10]=-ucli
+argv[11]=-l
+argv[12]=/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/verdiLog/sim.log
+279 profile - 100
+          CPU/Mem usage: 0.030 sys,  0.120 user,  318.62M mem
+280 Elapsed time:    0:00:00    Fri Nov 15 00:44:47 2024
+281 pliAppInit
+282 ndpGetenv(FSDB_FILE): /mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/inter.fsdb
+283 ndpGetenv(FSDB_SVA_STATUS): 1
+284 ndpGetenv(FSDB_VHDL_PROTECTED): 1
+285 [SC]Init: MemoryConsumed=0.00MB ElapsedTime=0hour 0min. 0sec.
+286 FSDB_GATE & FSDB_RTL is disabled.
+287 FSDB_FIELDTYPE is set.
+288 FSDB_ALIAS_ARRAY_ELEM is set to 4294967295.
+289 Enable Parallel Dumping.
+290 pliAppMiscSet: New Sim Round
+291 pliEntryInit
+292 LIBSSCORE=found /mnt/vol_NFS_rh003/tools/verdi/R-2020.12-SP2/share/PLI/lib/LINUXAMD64/libsscore_vcs202012.so through $NOVAS_HOME setting.
+293 FSDB Dumper for VCS, Release Verdi_R-2020.12-SP2, Linux x86_64/64bit, 05/23/2021
+294 (C) 1996 - 2021 by Synopsys, Inc.
+295 sps_tcl_fsdbDumpfile_main at 0
+296 argv[0]: /mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/inter.fsdb
+297 *Verdi* : Create FSDB file '/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/inter.fsdb'
+298 [spi_vcs_vd_ppi_create_root]: no upf option
+299 FSDB dumper cannot dump UPF related power signal ($power_tree): no ppiPowerNetwork.
+300 compile option from '/mnt/vol_NFS_rh003/Est_Verif_II2024/FERNANDEZ_ZUNIGA/Veri_Proyecto2/salida.daidir/vcs_rebuild'.
+301   "vcs '-Mupdate' 'test_bench.sv' '-o' 'salida' '-full64' '-debug_all' '-sverilog' '-kdb' '-lca' '-l' 'log_test' '+lint=TFIPC-L' '-ntb_opts' 'uvm-1.2' 2>&1"
+302 sps_tcl_fsdbDumpflush_vd_main at 0 : N/A(0)
+303 *Verdi* : Flush all FSDB Files at 0 s.
+304 sps_tcl_fsdbDumpflush_vd_main at 0 : N/A(0)
+305 *Verdi* : Flush all FSDB Files at 0 s.
+306 DVDI_is_vir_unload_enabled is enable
+307 FSDB_VCS_ENABLE_NATIVE_VC is enable
+308 sps_tcl_fsdbDumpvars_vd_main
+309 argv[0]: 0
+310 argv[1]: tb
+311 argv[2]: +all
+312 argv[3]: +trace_process
+313 *Verdi* : Begin traversing the scope (tb), layer (0).
+314 *Verdi* : Enable +trace_process and +all dumping.
+315 *Verdi* : End of traversing.
+316 pliAppHDL_DumpVarComplete traverse var: profile - 
+          CPU/Mem usage: 0.070 sys,  0.230 user,  416.34M mem
+                   incr: 0.010 sys,  0.010 user,  3.55M mem
+                   accu: 0.010 sys,  0.010 user,  3.55M mem
+              accu incr: 0.010 sys,  0.010 user,  3.55M mem
+
+          Count usage: 1758 var,  1396 idcode,  1387 callback
+                 incr: 1758 var,  1396 idcode,  1387 callback
+                 accu: 1758 var,  1396 idcode,  1387 callback
+            accu incr: 1758 var,  1396 idcode,  1387 callback
+317 Elapsed time:    0:05:32    Fri Nov 15 00:50:19 2024
+318 pliAppHDL_DumpVarComplete: profile - 
+          CPU/Mem usage: 0.070 sys,  0.230 user,  417.39M mem
+                   incr: 0.000 sys,  0.000 user,  1.05M mem
+                   accu: 0.010 sys,  0.010 user,  4.60M mem
+              accu incr: 0.000 sys,  0.000 user,  1.05M mem
+
+          Count usage: 1758 var,  1396 idcode,  1387 callback
+                 incr: 0 var,  0 idcode,  0 callback
+                 accu: 1758 var,  1396 idcode,  1387 callback
+            accu incr: 0 var,  0 idcode,  0 callback
+319 Elapsed time:    0:05:32    Fri Nov 15 00:50:19 2024
+320 sps_tcl_fsdbDumpflush_vd_main at 0 : N/A(0)
+321 *Verdi* : Flush all FSDB Files at 0 s.

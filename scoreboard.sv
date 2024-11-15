@@ -42,16 +42,6 @@ class scoreboard extends uvm_scoreboard;
 
     virtual function write(Item item);
 
-        //Definicion de Valores de X y Y
-        /*sign_X = item.fp_X[31];
-        sign_Y = item.fp_Y[31];
-
-        exp_X = item.fp_X[30:23];
-        exp_Y = item.fp_Y[30:23];
-
-        frac_X = item.fp_X[22:0];
-        frac_Y = item.fp_Y[22:0];*/
-
         sign_X = item.sign_X;
         sign_Y = item.sign_Y;
 
