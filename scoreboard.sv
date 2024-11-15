@@ -194,9 +194,11 @@ class scoreboard extends uvm_scoreboard;
             exp_Z = ((fp_X_exp + fp_Y_exp) - 127);
             if (fp_X_exp + fp_Y_exp <= 127) begin
                 underflow = 1;
+                overflow = 0;
             end
             else if (fp_X_exp + fp_Y_exp >= 255 + 127) begin
                 overflow = 1;
+                underflow = 0;
             end
             else begin
                 underflow = 0;
@@ -207,9 +209,11 @@ class scoreboard extends uvm_scoreboard;
             exp_Z = ((fp_X_exp + fp_Y_exp) - 126);
             if (fp_X_exp + fp_Y_exp <= 126) begin
                 underflow = 1;
+                overflow = 0;
             end
             else if (fp_X_exp + fp_Y_exp >= 255 + 126) begin
                 overflow = 1;
+                underflow = 0;
             end
             else begin
                 underflow = 0;
