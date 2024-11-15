@@ -103,7 +103,7 @@ class scoreboard extends uvm_scoreboard;
         frc_Z_norm_o = {frc_Z_norm, sticky_bit};
         //`uvm_info("SCBD", $sformatf("frc_Z_norm_o=%b", frc_Z_norm_o), UVM_LOW) // Seems to be working
 
-        // 5. Rounder
+        // 5. Rounder I'm making a mess out of this BTW
         // Separar los bits en componentes
         Z_data = frc_Z_norm_o[26:3];
         Z_data_p = Z_data + 1;
@@ -113,7 +113,8 @@ class scoreboard extends uvm_scoreboard;
         // Analizar Z_data_p para ver si va a ocurrir un overflow
         if (Z_data == 24'b1) begin
             norm_r = 1'b1;
-            Z_data_p = (Z_data_p >> 1)[22:0];
+            Z_data_p = Z_data_p >> 1;
+            Z_data_p = Z_data_p[22:0];
         end
         else begin
             norm_r = 1'b0;
