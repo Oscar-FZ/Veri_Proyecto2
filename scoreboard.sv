@@ -13,6 +13,11 @@ class scoreboard extends uvm_scoreboard;
     bit fp_Y_sign;
     bit result_sign;
 
+    // Exponente
+    bit [7:0] fp_X_exp;
+    bit [7:0] fp_Y_exp;
+    bit [7:0] exp_Z;
+
     // Fraccion
     bit [22:0] fp_X_frac;
     bit [22:0] fp_Y_frac;
@@ -36,6 +41,10 @@ class scoreboard extends uvm_scoreboard;
         fp_X_sign = item.fp_X[31];
         fp_Y_sign = item.fp_Y[31];
 
+        // Para calcular el exponente
+        fp_X_exp = item.fp_X[30:23];
+        fp_Y_exp = item.fp_Y[30:23];
+
         // Para hacer la multiplicacion fraccional
         fp_X_frac = item.fp_X[22:0];
         fp_Y_frac = item.fp_Y[22:0];
@@ -49,9 +58,13 @@ class scoreboard extends uvm_scoreboard;
         result_sign = fp_X_sign ^ fp_Y_sign;
         //`uvm_info("SCBD", $sformatf("result_sign=%b", result_sign), UVM_LOW) // Seems to be working
 
-        // 2. Multiplicador fraccional
+        // 2. Determinar el exponente
+        exp_Z = ((fp_X_exp + fp_Y_exp) - 127);
+        `uvm_info("SCBD", $sformatf("Exponente=%b", exp_Z), UVM_LOW) // Seems to be working
+
+        // 3. Multiplicador fraccional
         frc_Z_full = {1'b1, fp_X_frac} * {1'b1, fp_Y_frac};
-        `uvm_info("SCBD", $sformatf("Mul frac=%b", frc_Z_full), UVM_LOW) // Seems to be working
+        //`uvm_info("SCBD", $sformatf("Mul frac=%b", frc_Z_full), UVM_LOW) // Seems to be working
 
     endfunction
 endclass
