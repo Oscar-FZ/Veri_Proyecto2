@@ -37,8 +37,7 @@ class monitor extends uvm_monitor;
                     item.ovrf = vif.ovrf;
                     item.udrf = vif.udrf;
                     mon_analysis_port.write(item);
-                    `uvm_info("MON", $sformatf("Saw item: "), UVM_LOW)
-                    item.print();
+                    `uvm_info("MON", $sformatf("Saw item: %s", item.print()), UVM_HIGH)
                end
         end
     endtask

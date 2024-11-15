@@ -35,7 +35,9 @@ class Item extends uvm_sequence_item;
 
     //Constraints
     //TODO No se como aleatorizar datos punto flotante xd
-    constraint c1 {(exp_X + exp_Y - 127) < 128;}
+    //constraint c1 {(exp_X + exp_Y - 127) < 128;
+    //                (exp_X + exp_Y -127) > -126;
+    //                solve exp_X before exp_Y;}
     //constraint c1 {(exp_X + exp_Y - 127) > 128;}
     constraint c2 {r_mode inside{[0:4]};}
 endclass

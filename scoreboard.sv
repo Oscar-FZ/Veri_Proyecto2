@@ -7,6 +7,8 @@ class scoreboard extends uvm_scoreboard;
 
     //TODO Definir variables que seran usadas para el checkeo
 
+    shortreal X, Y;
+
     bit sign_X;
     bit sign_Y;
     bit sign_Z;
@@ -53,15 +55,28 @@ class scoreboard extends uvm_scoreboard;
         sign_X = item.sign_X;
         sign_Y = item.sign_Y;
 
-        exp_X = item.exp_X;
-        exp_Y = item.exp_Y;
-
         frac_X = item.frac_X;
         frac_Y = item.frac_Y;
 
+        exp_X = item.exp_X;
+        exp_Y = item.exp_Y;
+
+        X = $bitstoshortreal({sign_X, exp_X, frac_X});
+        Y = $bitstoshortreal({sign_Y, exp_Y, frac_Y});
+
+        if ((X > 3.4028235e38) || (X < -3.4028235e38)) begin
+            exp_X = 8'hFF;
+            frac_X = 23'b0;
+        end
+
+        else if (((X < 1.1754942e-38) && (X > 0)) || ((X > -1.1754942e-38) && (X < 0))) begin
+            exp_X = 8'h00;
+            frac_X = 23'b0;
+        end
+
         //Definicion del signo de Z
         sign_Z = sign_X ^ sign_Y;
-
+        
         //Definicion del exponente de Z
         exp_Z = exp_X + exp_Y - 127;
 
@@ -84,29 +99,43 @@ class scoreboard extends uvm_scoreboard;
         else begin
             sticky = 1'b1;
         end
-        
-        Z = {mul_frac[47:22], (mul_frac[23] | sticky)};
+        guard = mul_frac[23];
+        Z = {mul_frac[47:22], (guard | sticky)};
+        //Z[0] = guard|sticky
+        //Z[1] = round
 
         //Casos de Redondeo
         case(item.r_mode)
-            3'b000: begin
-                $display("Hola");
+            3'b000: begin //Round to nearest, ties to even
+                if (!Z[1]) Z = Z;
+
+                else begin
+                    if (Z[0]) Z[24:2] = Z[24:2] + 1'b1;
+
+                    else begin
+                        if (!Z[2]) Z = Z;
+                        else Z[24:2] = Z[24:2] + 1'b1;
+                    end
+                end
             end
 
-            3'b001: begin 
+            3'b001: begin //Round to zero
                 Z = Z;
             end
 
-            3'b010: begin
-                $display("Hola");
+            3'b010: begin //Round towards -inf
+                if (sign_Z) Z[24:2] = Z[24:2] + 1'b1;
+                else Z = Z;
             end
 
-            3'b011: begin
-                $display("Hola");
+            3'b011: begin //Round towards +inf
+                if (sign_Z) Z = Z;
+                else Z[24:2] = Z[24:2] + 1'b1;
             end
 
-            3'b100: begin
-                $display("Hola");
+            3'b100: begin //Round to nearest, ties away from zero
+                if (Z[1]) Z[24:2] = Z[24:2] + 1'b1;
+                else Z = Z;
             end    
         endcase
         
@@ -116,41 +145,46 @@ class scoreboard extends uvm_scoreboard;
         //Casos Especiales
 
         if ((exp_X == 8'h00 && frac_X == 23'h000000) || (exp_Y == 8'h00 && frac_Y == 23'h000000)) begin //Multiplicacion por cero
-            Z_aux = 32'h00000000;
+             Z_aux = {sign_Z, 31'b0000_0000_0000_0000_0000_0000_0000_000};
         end
 
         else if ((exp_X == 8'hFF) || (exp_Y == 8'hFF)) begin 
-            if ((frac_X == 23'h800000) || (frac_Y == 23'h800000)) begin //Multiplicacion de un NaN
-                Z_aux = {sign_Z, 31'b1111_1111_1000_0000_0000_0000_0000_000};
-            end
-
-            else if ((frac_X == 23'h000000) || (frac_Y == 23'h000000)) begin //Multiplicacion por infinito
+            if ((frac_X == 23'h000000) || (frac_Y == 23'h000000)) begin //Multiplicacion por infinito
                 Z_aux = {sign_Z, 31'b1111_1111_0000_0000_0000_0000_0000_000};
             end
 
-            else begin
-                Z_aux = Z_aux;  
+            else begin //Multiplicacion por NaN
+                Z_aux = {sign_Z, 31'b1111_1111_1000_0000_0000_0000_0000_000};
             end
         end
 
+        else if (exp_X+exp_Y >= 382) begin //Overflow 
+            Z_aux = {sign_Z, 31'b1111_1111_0000_0000_0000_0000_0000_000};
+        end
+        
+        else if (exp_X+exp_Y <= 127) begin //Underflow 
+            Z_aux = {sign_Z, 31'b0000_0000_0000_0000_0000_0000_0000_000};
+        end
         else begin 
             Z_aux = Z_aux;
         end
 
     
 
-        if (Z_aux != item.fp_Z) begin 
+        if (Z_aux != item.fp_Z) begin //TODO Evaluar caso NaN == -NaN
             `uvm_error("SCBD", $sformatf("ERROR Z recibido = %0g Z esperado = %0g", $bitstoshortreal(item.fp_Z), $bitstoshortreal(Z_aux)))
+            `uvm_info("SCBD", $sformatf("r mode=%0d X=%g Y=%g Z=%g Overflow=%b Underflow=%b",
+                item.r_mode, $bitstoshortreal({item.sign_X, item.exp_X, item.frac_X}), $bitstoshortreal({item.sign_Y, item.exp_Y, item.frac_Y}), $bitstoshortreal(item.fp_Z), item.ovrf, item.udrf), UVM_LOW)
+            `uvm_info("SCBD", $sformatf("127 <= %d <= 382 --- X = %d Y = %d", exp_X+exp_Y, item.exp_X, item.exp_Y), UVM_LOW)
+
         end
 
         else begin
-            `uvm_info("SCBD", $sformatf("CORRECTO Z recibido = %0g Z esperado = %0g", $bitstoshortreal(item.fp_Z), $bitstoshortreal(Z_aux)), UVM_LOW)
-        end
-        
-        
+            `uvm_info("SCBD", $sformatf("CORRECTO Z recibido = %0g Z esperado = %0g", $bitstoshortreal(item.fp_Z), $bitstoshortreal(Z_aux)), UVM_HIGH)
+            `uvm_info("SCBD", $sformatf("r mode=%0d X=%g Y=%g Z=%g Overflow=%b Underflow=%b",
+                item.r_mode, $bitstoshortreal({item.sign_X, item.exp_X, item.frac_X}), $bitstoshortreal({item.sign_Y, item.exp_Y, item.frac_Y}), $bitstoshortreal(item.fp_Z), item.ovrf, item.udrf), UVM_HIGH)
 
-        `uvm_info("SCBD", $sformatf("r mode=%0d X=%g Y=%g Z=%g Overflow=%b Underflow=%b",
-            item.r_mode, $bitstoshortreal({item.sign_X, item.exp_X, item.frac_X}), $bitstoshortreal({item.sign_Y, item.exp_Y, item.frac_Y}), $bitstoshortreal(item.fp_Z), item.ovrf, item.udrf), UVM_LOW)
+        end
     endfunction
 endclass
 
