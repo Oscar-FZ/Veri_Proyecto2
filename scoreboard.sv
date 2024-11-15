@@ -23,6 +23,13 @@ class scoreboard extends uvm_scoreboard;
     bit [22:0] fp_Y_frac;
     bit [47:0] frc_Z_full;
 
+    // Normalizador
+    bit norm_n;
+    bit [25:0] frc_Z_norm;
+    bit sticky_bit;
+    bit [47:0] frc_Z_mux;
+    bit [26:0] frc_Z_norm_o;
+
     uvm_analysis_imp #(Item, scoreboard) m_analysis_imp;
 
     virtual function void build_phase(uvm_phase phase);
@@ -58,13 +65,35 @@ class scoreboard extends uvm_scoreboard;
         result_sign = fp_X_sign ^ fp_Y_sign;
         //`uvm_info("SCBD", $sformatf("result_sign=%b", result_sign), UVM_LOW) // Seems to be working
 
-        // 2. Determinar el exponente
+        // 2. Determinar el exponente 
         exp_Z = ((fp_X_exp + fp_Y_exp) - 127);
-        `uvm_info("SCBD", $sformatf("Exponente=%b", exp_Z), UVM_LOW) // Seems to be working
+        //`uvm_info("SCBD", $sformatf("Exponente=%b", exp_Z), UVM_LOW) // Seems to be working
 
         // 3. Multiplicador fraccional
         frc_Z_full = {1'b1, fp_X_frac} * {1'b1, fp_Y_frac};
         //`uvm_info("SCBD", $sformatf("Mul frac=%b", frc_Z_full), UVM_LOW) // Seems to be working
+
+        // 4. Normalizador
+        norm_n = frc_Z_full[47]; //Esto se ocupa para otra cosa despues
+
+        if (norm_n == 1) begin
+            frc_Z_mux = frc_Z_full;
+        end
+        else begin
+            frc_Z_mux = {frc_Z_full[46:0], 1'b0};
+        end
+
+        frc_Z_norm = frc_Z_mux[47:22];
+
+        if (frc_Z_mux[21:0] == 0) begin
+            sticky_bit = 0;
+        end
+        else begin
+            sticky_bit = 1;
+        end
+
+        frc_Z_norm_o = {frc_Z_norm, sticky_bit};
+        `uvm_info("SCBD", $sformatf("frc_Z_norm_o=%b", frc_Z_norm_o), UVM_LOW) // Seems to be working
 
     endfunction
 endclass
