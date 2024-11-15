@@ -118,7 +118,7 @@ class scoreboard extends uvm_scoreboard;
                     frc_Z = Z_data_p;
                 end
                 else if (round_bit == 1 & guardVsticky == 0) begin
-                    if (z_data[0] == 0) begin
+                    if (Z_data[0] == 0) begin
                         frc_Z = Z_data;
                     end
                     else begin
