@@ -36,6 +36,7 @@ class scoreboard extends uvm_scoreboard;
     bit [23:0] Z_data_p;
     bit round_bit;
     bit guardVsticky;
+    bit norm_r;
 
     uvm_analysis_imp #(Item, scoreboard) m_analysis_imp;
 
@@ -108,6 +109,16 @@ class scoreboard extends uvm_scoreboard;
         Z_data_p = Z_data + 1;
         round_bit = frc_Z_norm_o[2];
         guardVsticky = (frc_Z_norm_o[1] | frc_Z_norm_o[0]);
+
+        // Analizar Z_data_p para ver si va a ocurrir un overflow
+        if (Z_data == 24'b1) begin
+            norm_r = 1'b1;
+            Z_data_p = (Z_data_p >> 1)[22:0];
+        end
+        else begin
+            norm_r = 1'b0;
+            Z_data_p = Z_data_p;
+        end
 
         case (item.r_mode)
             3'b000: begin
