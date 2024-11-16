@@ -13,7 +13,7 @@ class gen_item_seq extends uvm_sequence;
 
     virtual task body();
         if (test) begin
-            `uvm_info("SEQ: Test WOrked", UVM_LOW)
+            $display("Test worked lmao");
         end
 
         for (int i = 0; i < num; i++) begin
