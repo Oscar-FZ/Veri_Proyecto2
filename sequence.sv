@@ -18,6 +18,7 @@ class gen_item_seq extends uvm_sequence;
 
         for (int i = 0; i < num; i++) begin
             Item m_item = Item::type_id::create("m_item");
+            m_item.test_s = test; // Control del sequence al sequence item
             start_item(m_item);
             m_item.randomize();
             `uvm_info("SEQ", $sformatf("Generate new item: "), UVM_HIGH)
