@@ -1,6 +1,8 @@
 class gen_item_seq extends uvm_sequence;
     `uvm_object_utils(gen_item_seq)
 
+    bit test;
+
     function new (string name = "gen_item_seq");
         super.new(name);
     endfunction
@@ -10,6 +12,10 @@ class gen_item_seq extends uvm_sequence;
     constraint c1 {soft num inside {[10:50]};}
 
     virtual task body();
+        if (test) begin
+            'uvm_info("SEQ: Test WOrked", UVM_LOW)
+        end
+
         for (int i = 0; i < num; i++) begin
             Item m_item = Item::type_id::create("m_item");
             start_item(m_item);

@@ -51,6 +51,7 @@ class test_fpmul extends base_test;
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
         seq.randomize() with {num inside {[50: 80]};};
+        seq.test = 1;
     endfunction
 endclass
 
