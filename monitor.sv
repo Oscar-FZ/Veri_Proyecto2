@@ -22,7 +22,7 @@ class monitor extends uvm_monitor;
             @(vif.cb);
                 if(vif.rstn) begin
                     Item item = Item::type_id::create("item");
-                    //Item item = new;
+                    //Item item = new;/
                     item.r_mode = vif.r_mode;
                     item.sign_X = vif.fp_X[31];
                     item.exp_X = vif.fp_X[30:23];
