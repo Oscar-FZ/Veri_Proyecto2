@@ -19,7 +19,7 @@ class monitor extends uvm_monitor;
         super.run_phase(phase);
 
         forever begin
-            @(vif.cb);
+            @(vif.fp_Z); //Changed this from the clock signal to the result signal
                 if(vif.rstn) begin
                     Item item = Item::type_id::create("item");
                     //Item item = new;
