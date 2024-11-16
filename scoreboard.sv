@@ -6,46 +6,31 @@ class scoreboard extends uvm_scoreboard;
     endfunction
 
     //TODO Definir variables que seran usadas para el checkeo
-    shortreal exp_result;
-    // Variables para la simulacion
-    // Signo
-    bit fp_X_sign;
-    bit fp_Y_sign;
-    bit result_sign;
 
-    // Exponente
-    bit [7:0] fp_X_exp;
-    bit [7:0] fp_Y_exp;
+    shortreal X, Y;
+
+    bit sign_X;
+    bit sign_Y;
+    bit sign_Z;
+
+    bit [7:0] exp_X;
+    bit [7:0] exp_Y;
     bit [7:0] exp_Z;
 
-    // Fraccion
-    bit [22:0] fp_X_frac;
-    bit [22:0] fp_Y_frac;
-    bit [47:0] frc_Z_full;
+    bit [22:0] frac_X;
+    bit [22:0] frac_Y;
+    bit [22:0] frac_Z;
 
-    // Normalizador
-    bit norm_n;
-    bit [25:0] frc_Z_norm;
-    bit sticky_bit;
-    bit [47:0] frc_Z_mux;
-    bit [26:0] frc_Z_norm_o;
+    bit [47:0] mul_frac;
+    int msb;
+    bit round;
+    bit guard;
+    bit sticky;
+    bit [26:0] Z;
+    bit [23:0] Z_plus;
+    bit [23:0] Z_round;
 
-    // Redondeador
-    bit [22:0] frc_Z;
-    bit [23:0] Z_data;
-    bit [23:0] Z_data_p;
-    bit round_bit;
-    bit guardVsticky;
-    bit norm_r;
-
-    // Exponente
-    bit [7:0] fp_X_exp;
-    bit [7:0] fp_Y_exp;
-    bit [7:0] exp_Z;
-    bit norm;
-    bit [8:0] status;
-    bit underflow;
-    bit overflow;
+    bit [31:0] Z_aux;
 
     uvm_analysis_imp #(Item, scoreboard) m_analysis_imp;
 
@@ -56,172 +41,139 @@ class scoreboard extends uvm_scoreboard;
     endfunction
 
     virtual function write(Item item);
-        shortreal fp_X_float = $bitstoshortreal(item.fp_X);
-        shortreal fp_Y_float = $bitstoshortreal(item.fp_Y);
-        shortreal fp_Z_float = $bitstoshortreal(item.fp_Z);
 
-        // Variables para simular la multiplicacion en punto flotante
-        // Para determinar el signo
-        fp_X_sign = item.fp_X[31];
-        fp_Y_sign = item.fp_Y[31];
+        sign_X = item.sign_X;
+        sign_Y = item.sign_Y;
 
-        // Para calcular el exponente
-        fp_X_exp = item.fp_X[30:23];
-        fp_Y_exp = item.fp_Y[30:23];
+        frac_X = item.frac_X;
+        frac_Y = item.frac_Y;
 
-        // Para hacer la multiplicacion fraccional
-        fp_X_frac = item.fp_X[22:0];
-        fp_Y_frac = item.fp_Y[22:0];
+        exp_X = item.exp_X;
+        exp_Y = item.exp_Y;
 
-        `uvm_info("SCBD", $sformatf("r mode=%0d X=%e Y=%e Z=%e Overflow=%b Underflow=%b", 
-        item.r_mode, fp_X_float, fp_Y_float, fp_Z_float, item.ovrf, item.udrf), UVM_LOW)
+        X = $bitstoshortreal({sign_X, exp_X, frac_X});
+        Y = $bitstoshortreal({sign_Y, exp_Y, frac_Y});
+
+        if ((X > 3.4028235e38) || (X < -3.4028235e38)) begin
+            exp_X = 8'hFF;
+            frac_X = 23'b0;
+        end
+
+        else if (((X < 1.1754942e-38) && (X > 0)) || ((X > -1.1754942e-38) && (X < 0))) begin
+            exp_X = 8'h00;
+            frac_X = 23'b0;
+        end
+
+        //Definicion del signo de Z
+        sign_Z = sign_X ^ sign_Y;
         
-        //TODO Hacer checker
-        
-        // 1. Determinar el signo
-        result_sign = fp_X_sign ^ fp_Y_sign;
-        //`uvm_info("SCBD", $sformatf("result_sign=%b", result_sign), UVM_LOW) // Seems to be working
+        //Definicion del exponente de Z
+        exp_Z = exp_X + exp_Y - 127;
 
-        // 2. Determinar el exponente 
-        //exp_Z = ((fp_X_exp + fp_Y_exp) - 127);
-        //`uvm_info("SCBD", $sformatf("Exponente=%b", exp_Z), UVM_LOW) // Seems to be working
+        //Definicion de la fraccion de Z
+        mul_frac = {1'b1, frac_X} * {1'b1, frac_Y};
 
-        // 3. Multiplicador fraccional
-        frc_Z_full = {1'b1, fp_X_frac} * {1'b1, fp_Y_frac};
-        //`uvm_info("SCBD", $sformatf("Mul frac=%b", frc_Z_full), UVM_LOW) // Seems to be working
-
-        // 4. Normalizador
-        norm_n = frc_Z_full[47]; //Esto se ocupa para otra cosa despues
-
-        if (norm_n == 1) begin
-            frc_Z_mux = frc_Z_full;
+        if (mul_frac[47] == 1) begin
+            mul_frac = mul_frac >> 1;
+            exp_Z = exp_Z + 1'b1;
         end
+
         else begin
-            frc_Z_mux = {frc_Z_full[46:0], 1'b0};
+            mul_frac = {mul_frac[46:1], 1'b0}; 
         end
 
-        frc_Z_norm = frc_Z_mux[47:22];
-
-        if (frc_Z_mux[21:0] == 0) begin
-            sticky_bit = 0;
+        if (mul_frac[21:0] == 0) begin
+            sticky = 1'b0;
         end
+
         else begin
-            sticky_bit = 1;
+            sticky = 1'b1;
         end
+        guard = mul_frac[23];
+        Z = {mul_frac[47:22], (guard | sticky)};
+        //Z[0] = guard|sticky
+        //Z[1] = round
 
-        frc_Z_norm_o = {frc_Z_norm, sticky_bit};
-        //`uvm_info("SCBD", $sformatf("frc_Z_norm_o=%b", frc_Z_norm_o), UVM_LOW) // Seems to be working
+        //Casos de Redondeo
+        case(item.r_mode)
+            3'b000: begin //Round to nearest, ties to even
+                if (!Z[1]) Z = Z;
 
-        // 5. Rounder I'm making a mess out of this BTW
-        // Separar los bits en componentes
-        Z_data = frc_Z_norm_o[26:3];
-        Z_data_p = Z_data + 1;
-        round_bit = frc_Z_norm_o[2];
-        guardVsticky = (frc_Z_norm_o[1] | frc_Z_norm_o[0]);
+                else begin
+                    if (Z[0]) Z[24:2] = Z[24:2] + 1'b1;
 
-        // Analizar Z_data_p para ver si va a ocurrir un overflow
-        if (Z_data == 24'b1) begin
-            norm_r = 1'b1;
-            Z_data_p = Z_data_p >> 1;
-            Z_data_p = Z_data_p[22:0];
-        end
-        else begin
-            norm_r = 1'b0;
-            Z_data_p = Z_data_p;
-        end
-
-        case (item.r_mode)
-            3'b000: begin
-                if (round_bit == 0) begin
-                    frc_Z = Z_data;
-                end
-                else if (round_bit && guardVsticky == 1) begin
-                    frc_Z = Z_data_p;
-                end
-                else if (round_bit == 1 & guardVsticky == 0) begin
-                    if (Z_data[0] == 0) begin
-                        frc_Z = Z_data;
-                    end
                     else begin
-                        frc_Z = Z_data_p;
+                        if (!Z[2]) Z = Z;
+                        else Z[24:2] = Z[24:2] + 1'b1;
                     end
                 end
             end
 
-            3'b001: begin
-                frc_Z = Z_data;
+            3'b001: begin //Round to zero
+                Z = Z;
             end
 
-            3'b010: begin
-                if (result_sign == 0) begin
-                    frc_Z = Z_data;
-                end
-                else begin
-                    frc_Z = Z_data_p;
-                end
+            3'b010: begin //Round towards -inf
+                if (sign_Z) Z[24:2] = Z[24:2] + 1'b1;
+                else Z = Z;
             end
 
-            3'b011: begin
-                if (result_sign == 1) begin
-                    frc_Z = Z_data;
-                end
-                else begin
-                    frc_Z = Z_data_p;
-                end
+            3'b011: begin //Round towards +inf
+                if (sign_Z) Z = Z;
+                else Z[24:2] = Z[24:2] + 1'b1;
             end
 
-            3'b100: begin
-                if (round_bit == 0) begin
-                    frc_Z = Z_data;
-                end
-                else begin
-                    frc_Z = Z_data_p;
-                end
-            end
-
-            default: begin
-                frc_Z = 'bx;
-            end
+            3'b100: begin //Round to nearest, ties away from zero
+                if (Z[1]) Z[24:2] = Z[24:2] + 1'b1;
+                else Z = Z;
+            end    
         endcase
+        
+        frac_Z = Z[24:2];
+        Z_aux = {sign_Z, exp_Z, frac_Z};
+
+        //Casos Especiales
+
+        if ((exp_X == 8'h00 && frac_X == 23'h000000) || (exp_Y == 8'h00 && frac_Y == 23'h000000)) begin //Multiplicacion por cero
+             Z_aux = {sign_Z, 31'b0000_0000_0000_0000_0000_0000_0000_000};
+        end
+
+        else if ((exp_X == 8'hFF) || (exp_Y == 8'hFF)) begin 
+            if ((frac_X == 23'h000000) || (frac_Y == 23'h000000)) begin //Multiplicacion por infinito
+                Z_aux = {sign_Z, 31'b1111_1111_0000_0000_0000_0000_0000_000};
+            end
+
+            else begin //Multiplicacion por NaN
+                Z_aux = {sign_Z, 31'b1111_1111_1000_0000_0000_0000_0000_000};
+            end
+        end
+
+        else if (exp_X+exp_Y >= 382) begin //Overflow 
+            Z_aux = {sign_Z, 31'b1111_1111_0000_0000_0000_0000_0000_000};
+        end
+        
+        else if (exp_X+exp_Y <= 127) begin //Underflow 
+            Z_aux = {sign_Z, 31'b0000_0000_0000_0000_0000_0000_0000_000};
+        end
+        else begin 
+            Z_aux = Z_aux;
+        end
+
     
-        //`uvm_info("SCBD", $sformatf("fraccion=%h", frc_Z), UVM_LOW) // Seems to be working
 
-        //Biased exponent adder
-        // Check for over/underflow
+        if (Z_aux != item.fp_Z) begin //TODO Evaluar caso NaN == -NaN
+            `uvm_error("SCBD", $sformatf("ERROR Z recibido = %0g Z esperado = %0g", $bitstoshortreal(item.fp_Z), $bitstoshortreal(Z_aux)))
+            `uvm_info("SCBD", $sformatf("r mode=%0d X=%g Y=%g Z=%g Overflow=%b Underflow=%b",
+                item.r_mode, $bitstoshortreal({item.sign_X, item.exp_X, item.frac_X}), $bitstoshortreal({item.sign_Y, item.exp_Y, item.frac_Y}), $bitstoshortreal(item.fp_Z), item.ovrf, item.udrf), UVM_LOW)
+            `uvm_info("SCBD", $sformatf("127 <= %d <= 382 --- X = %d Y = %d", exp_X+exp_Y, item.exp_X, item.exp_Y), UVM_LOW)
 
-        norm = (norm_n | norm_r);
-        if (norm == 0) begin
-            exp_Z = ((fp_X_exp + fp_Y_exp) - 127);
-            if (fp_X_exp + fp_Y_exp <= 127) begin
-                underflow = 1;
-                overflow = 0;
-            end
-            else if (fp_X_exp + fp_Y_exp >= 255 + 127) begin
-                overflow = 1;
-                underflow = 0;
-            end
-            else begin
-                underflow = 0;
-                overflow = 0;
-            end
         end
+
         else begin
-            exp_Z = ((fp_X_exp + fp_Y_exp) - 126);
-            if (fp_X_exp + fp_Y_exp <= 126) begin
-                underflow = 1;
-                overflow = 0;
-            end
-            else if (fp_X_exp + fp_Y_exp >= 255 + 126) begin
-                overflow = 1;
-                underflow = 0;
-            end
-            else begin
-                underflow = 0;
-                overflow = 0;
-            end
-        end
-        `uvm_info("SCBD", $sformatf("norm=%b, underflow=%b, overflow=%b", norm, underflow, overflow), UVM_LOW) // Seems to be working
+            `uvm_info("SCBD", $sformatf("CORRECTO Z recibido = %0g Z esperado = %0g", $bitstoshortreal(item.fp_Z), $bitstoshortreal(Z_aux)), UVM_HIGH)
+            `uvm_info("SCBD", $sformatf("r mode=%0d X=%g Y=%g Z=%g Overflow=%b Underflow=%b",
+                item.r_mode, $bitstoshortreal({item.sign_X, item.exp_X, item.frac_X}), $bitstoshortreal({item.sign_Y, item.exp_Y, item.frac_Y}), $bitstoshortreal(item.fp_Z), item.ovrf, item.udrf), UVM_HIGH)
 
+        end
     endfunction
 endclass
-

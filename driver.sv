@@ -17,7 +17,7 @@ class driver extends uvm_driver #(Item);
         super.run_phase(phase);
         forever begin
             Item m_item;
-            `uvm_info("DRV", $sformatf("Wait for item from sequencer"), UVM_LOW)
+            `uvm_info("DRV", $sformatf("Wait for item from sequencer"), UVM_HIGH)
             seq_item_port.get_next_item(m_item);
             drive_item(m_item);
             seq_item_port.item_done();
@@ -27,7 +27,7 @@ class driver extends uvm_driver #(Item);
     virtual task drive_item(Item m_item);
         @(vif.cb);
             vif.cb.r_mode <= m_item.r_mode;
-            vif.cb.fp_X <= m_item.fp_X;
-            vif.cb.fp_Y <= m_item.fp_Y;
+            vif.cb.fp_X <= {m_item.sign_X, m_item.exp_X, m_item.frac_X};
+            vif.cb.fp_Y <= {m_item.sign_Y, m_item.exp_Y, m_item.frac_Y};
     endtask
 endclass

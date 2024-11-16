@@ -30,7 +30,7 @@ class base_test extends uvm_test;
         phase.drop_objection(this);
     endtask
 
-    virtual task apply_reset();
+    virtual task apply_reset(); //TODO ACTUALIZAR
         vif.rstn <= 0;
         vif.r_mode <= 0;
         vif.fp_X <= 0;
@@ -50,8 +50,7 @@ class test_fpmul extends base_test;
 
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
-        //seq.randomize() with {num inside {[12: 22]};};
-        seq.randomize() with {num inside {1};};
+        seq.randomize() with {num inside {[500: 800]};};
     endfunction
 endclass
 
