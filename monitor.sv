@@ -8,11 +8,27 @@ class monitor extends uvm_monitor;
     uvm_analysis_port #(Item) mon_analysis_port;
     virtual fpmul_if vif;
 
+    Item item_anterior;
+
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
         if (!uvm_config_db#(virtual fpmul_if)::get(this, "", "fpmul_if", vif))
             `uvm_fatal("MON", "Could not get vif")
         mon_analysis_port = new("mon_analysis_port", this);
+    endfunction
+
+    function bit comparar_items (Item actual, Item anterior);
+        return (actual.r_mode == anterior.r_mode &&
+                actual.sign_X == anterior.sign_X &&
+                actual.exp_X == anterior.exp_X &&
+                actual.frac_X == anterior.frac_X &&
+                actual.sign_Y == anterior.sign_Y &&
+                actual.exp_Y == anterior.exp_Y &&
+                actual.frac_Y == anterior.frac_Y &&
+                actual.fp_Z == anterior.fp_Z &&
+                actual.ovrf == anterior.ovrf &&
+                actual.udrf == anterior.udrf
+            );
     endfunction
 
     virtual task run_phase(uvm_phase phase);
