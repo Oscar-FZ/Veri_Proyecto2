@@ -166,17 +166,14 @@ class scoreboard extends uvm_scoreboard;
 
         if ((exp_X == 8'h00 && frac_X == 23'h000000) || (exp_Y == 8'h00 && frac_Y == 23'h000000)) begin //Multiplicacion por cero
              Z_aux = {sign_Z, 31'b0000_0000_0000_0000_0000_0000_0000_000};
-             $display("Estamos en mul 0 mi gente");
         end
 
         else if ((exp_X == 8'hFF) || (exp_Y == 8'hFF)) begin 
             if ((frac_X != 0) || (frac_Y != 0)) begin // Multiplicacion por NaN
-                $display("A ver si funciona");
                 Z_aux = {1'b0, 31'b1111_1111_1000_0000_0000_0000_0000_000}; //El DUT solo genera +NaN
             end
 
             else begin //Multiplicacion por infinito
-                $display("No deberia poder leer esto");
                 Z_aux = {sign_Z, 31'b1111_1111_0000_0000_0000_0000_0000_000};
             end
 
