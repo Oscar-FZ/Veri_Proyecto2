@@ -65,7 +65,7 @@ class Item extends uvm_sequence_item;
 
     constraint test_nxi {
         if (c_nxi) {
-            exp_X == 8'b1;
+            exp_X == 8'hFF;
             frac_X == 23'b1;
         }
     }
