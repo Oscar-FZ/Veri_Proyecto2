@@ -170,8 +170,8 @@ class scoreboard extends uvm_scoreboard;
         end
 
         else if ((item.exp_X == 8'hFF) || (item.exp_Y == 8'hFF)) begin 
-            if ((item.frac_X[22] == 1'b1) || (item.frac_Y[22] == 1'b1)) begin
-                $display("A ver si funciona")
+            if ((item.frac_X != 0) || (item.frac_Y != 0)) begin
+                $display("A ver si funciona");
             end
 
             //if (((item.frac_X == 23'h000000) || (item.frac_Y == 23'h000000)) && ((item.frac_X[22] != 1'b1) || (item.frac_Y[22] != 1'b1))) begin //Multiplicacion por infinito
