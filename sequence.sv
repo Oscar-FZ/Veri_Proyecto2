@@ -30,7 +30,6 @@ class gen_item_seq extends uvm_sequence;
             m_item.print();
             finish_item(m_item);
             #retardo_envio;
-            $display("retardo:%d", retardo_envio);
         end
         `uvm_info("SEQ", $sformatf("Done generation of %0d items", num), UVM_LOW)
     endtask
