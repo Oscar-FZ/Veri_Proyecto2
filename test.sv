@@ -82,3 +82,17 @@ class test_cero extends base_test;
         seq.c_cero = 1;
     endfunction
 endclass
+
+class test_numxinf extends base_test;
+    `uvm_component_utils(test_numxinf)
+
+    function new (string name = "test_numxinf", uvm_component parent = null);
+        super.new(name,parent);
+    endfunction
+
+    virtual function void build_phase(uvm_phase phase);
+        super.build_phase(phase);
+        seq.randomize();
+        seq.c_nxi = 1;
+    endfunction
+endclass

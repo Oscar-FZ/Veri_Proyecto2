@@ -11,6 +11,7 @@ class Item extends uvm_sequence_item;
     bit test_s;
     bit c_ident;
     bit c_cero;
+    bit c_nxi;
 
     //fp_X = {sign_X, exp_X, frac_X};
     //fp_Y = {sign_Y, exp_Y, frac_Y};
@@ -59,6 +60,13 @@ class Item extends uvm_sequence_item;
         if (c_cero) {
             exp_Y == 8'b0;
             frac_Y == 23'b0;
+        }
+    }
+
+    constraint test_nxi {
+        if (c_nxi) {
+            exp_X == 8'b1;
+            frac_X == 23'b0;
         }
     }
 endclass
