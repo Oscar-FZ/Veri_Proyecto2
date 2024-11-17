@@ -167,7 +167,6 @@ class scoreboard extends uvm_scoreboard;
             end
         end
 
-        // ARREGLAR LO DEL EXPONENTE
 
         else if (exp_X+exp_Y >= 382) begin //Overflow 
             Z_aux = {sign_Z, 31'b1111_1111_0000_0000_0000_0000_0000_000};
