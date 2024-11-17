@@ -52,8 +52,12 @@ class monitor extends uvm_monitor;
                     item.fp_Z = vif.fp_Z;
                     item.ovrf = vif.ovrf;
                     item.udrf = vif.udrf;
-                    mon_analysis_port.write(item);
-                    `uvm_info("MON", $sformatf("Saw item: %s", item.print()), UVM_HIGH)
+
+                    if (item_anterior == null || !comparar_items(item, item_anterior)) begin
+                        mon_analysis_port.write(item);
+                        `uvm_info("MON", $sformatf("Saw item: %s", item.print()), UVM_HIGH)
+                        item_anterior = item;
+                    end
                end
         end
     endtask
