@@ -5,6 +5,7 @@ class gen_item_seq extends uvm_sequence;
     bit c_ident;
     bit c_cero;
     bit c_nxi;
+    bit c_nan;
 
     function new (string name = "gen_item_seq");
         super.new(name);
@@ -23,6 +24,7 @@ class gen_item_seq extends uvm_sequence;
             m_item.c_ident = c_ident;
             m_item.c_cero = c_cero;
             m_item.c_nxi = c_nxi;
+            m_item.c_nan = c_nan;
 
             if (!this.randomize() with {retardo_envio inside {[100:300]};}) begin
                 `uvm_error("SEQ", "Error al aleatorizar el tiempo de retraso")

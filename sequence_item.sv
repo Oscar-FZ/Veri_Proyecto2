@@ -12,6 +12,7 @@ class Item extends uvm_sequence_item;
     bit c_ident;
     bit c_cero;
     bit c_nxi;
+    bit c_nan;
 
     //fp_X = {sign_X, exp_X, frac_X};
     //fp_Y = {sign_Y, exp_Y, frac_Y};
@@ -67,6 +68,13 @@ class Item extends uvm_sequence_item;
         if (c_nxi) {
             exp_X == 8'hFF;
             frac_X == 23'b0;
+        }
+    }
+
+    constraint test_nan {
+        if (c_nan) {
+            exp_Y == 8'hFF;
+            frac_Y > 0;
         }
     }
 endclass
