@@ -9,6 +9,8 @@ class scoreboard extends uvm_scoreboard;
 
     shortreal X, Y;
 
+    int csv_file;
+
     bit sign_X;
     bit sign_Y;
     bit sign_Z;
@@ -175,5 +177,10 @@ class scoreboard extends uvm_scoreboard;
                 item.r_mode, $bitstoshortreal({item.sign_X, item.exp_X, item.frac_X}), $bitstoshortreal({item.sign_Y, item.exp_Y, item.frac_Y}), $bitstoshortreal(item.fp_Z), item.ovrf, item.udrf), UVM_HIGH)
 
         end
+
+       csv_file = $fopen("Resultados.csv", "w"); 
+       $fwrite(csv_file, "Prueba, Tiempo:%d;", $time);
+       $fclose(csv_file);
+
     endfunction
 endclass
