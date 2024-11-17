@@ -174,7 +174,7 @@ class scoreboard extends uvm_scoreboard;
                 Z_aux = {1'b0, 31'b1111_1111_1000_0000_0000_0000_0000_000}; //El DUT solo genera +NaN
             end
 
-            else begin //Multiplicacion por infinito
+            else if if ((item.exp_X == 8'hFF && item.frac_X == 0) || (item.exp_Y == 8'hFF && item.frac_Y == 0)) begin //Multiplicacion por infinito
                 Z_aux = {sign_Z, 31'b1111_1111_0000_0000_0000_0000_0000_000};
             end
 
