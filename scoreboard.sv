@@ -55,7 +55,7 @@ class scoreboard extends uvm_scoreboard;
         end
     endfunction
 
-    function bit obtener_flow (bit [7:0] exp1, bit [7:0] exp2);
+    function void obtener_flow (bit [7:0] exp1, bit [7:0] exp2);
         if (exp_X+exp_Y >= 382) begin //Overflow 
             ovrf_aux = 1'b1;
             udrf_aux = 1'b0;
@@ -69,7 +69,6 @@ class scoreboard extends uvm_scoreboard;
             udrf_aux = 1'b0;
             ovrf_aux = 1'b0;
         end
-
     endfunction
 
     virtual function void final_phase(uvm_phase phase); 
