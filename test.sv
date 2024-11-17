@@ -124,3 +124,17 @@ class test_ovrf extends base_test;
         seq.c_ovrf = 1;
     endfunction
 endclass
+
+class test_udrf extends base_test;
+    `uvm_component_utils(test_udrf)
+
+    function new (string name = "test_udrf", uvm_component parent = null);
+        super.new(name,parent);
+    endfunction
+
+    virtual function void build_phase(uvm_phase phase);
+        super.build_phase(phase);
+        seq.randomize();
+        seq.c_udrf = 1;
+    endfunction
+endclass
