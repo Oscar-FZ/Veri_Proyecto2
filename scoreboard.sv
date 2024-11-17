@@ -184,6 +184,7 @@ class scoreboard extends uvm_scoreboard;
 
         if ((exp_X == 8'h00 && frac_X == 23'h000000) || (exp_Y == 8'h00 && frac_Y == 23'h000000)) begin //Multiplicacion por cero
             Z_aux = {sign_Z, 31'b0000_0000_0000_0000_0000_0000_0000_000};
+            obtener_flow(exp_X, exp_Y);
         end
 
         else if ((exp_X == 8'hFF) || (exp_Y == 8'hFF)) begin 
@@ -196,6 +197,7 @@ class scoreboard extends uvm_scoreboard;
 
             else begin //Multiplicacion por infinito
                 Z_aux = {sign_Z, 31'b1111_1111_0000_0000_0000_0000_0000_000};
+                obtener_flow(exp_X, exp_Y);
             end
         end
 
