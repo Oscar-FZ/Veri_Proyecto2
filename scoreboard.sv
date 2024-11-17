@@ -178,9 +178,10 @@ class scoreboard extends uvm_scoreboard;
         
         frac_Z = Z[24:2];
         Z_aux = {sign_Z, exp_Z, frac_Z};
-        //cuenta = cuenta + 1;
+
         //Casos Especiales
 
+        // Creo que habria que cambiar el orden a nan->infinito->cero
         if ((exp_X == 8'h00 && frac_X == 23'h000000) || (exp_Y == 8'h00 && frac_Y == 23'h000000)) begin //Multiplicacion por cero
             Z_aux = {sign_Z, 31'b0000_0000_0000_0000_0000_0000_0000_000};
             obtener_flow(exp_X, exp_Y);
@@ -231,7 +232,7 @@ class scoreboard extends uvm_scoreboard;
                 item.udrf
             );
 
-        if (Z_aux != item.fp_Z) begin //TODO Evaluar caso NaN == -NaN // This seems to be fixed
+        if (Z_aux != item.fp_Z) begin //TODO Evaluar caso NaN == -NaN
             `uvm_error("SCBD", $sformatf("ERROR Z recibido = %0g Z esperado = %0g", $bitstoshortreal(item.fp_Z), $bitstoshortreal(Z_aux)))
             `uvm_info("SCBD", $sformatf("r mode=%0d X=%g Y=%g Z=%g Overflow=%b Underflow=%b",
                 item.r_mode, $bitstoshortreal({item.sign_X, item.exp_X, item.frac_X}), $bitstoshortreal({item.sign_Y, item.exp_Y, item.frac_Y}), $bitstoshortreal(item.fp_Z), item.ovrf, item.udrf), UVM_LOW)
