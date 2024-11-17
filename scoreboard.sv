@@ -174,6 +174,10 @@ class scoreboard extends uvm_scoreboard;
                 $display("A ver si funciona");
             end
 
+            else begin
+                $display("No deberia poder leer esto");
+            end
+
             //if (((item.frac_X == 23'h000000) || (item.frac_Y == 23'h000000)) && ((item.frac_X[22] != 1'b1) || (item.frac_Y[22] != 1'b1))) begin //Multiplicacion por infinito
                 //Z_aux = {sign_Z, 31'b1111_1111_0000_0000_0000_0000_0000_000};
                 //$display("Estamos en mul infinito mi gente");
