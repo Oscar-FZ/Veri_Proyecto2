@@ -170,8 +170,9 @@ class scoreboard extends uvm_scoreboard;
         end
 
         else if ((item.exp_X == 8'hFF) || (item.exp_Y == 8'hFF)) begin 
-            if ((item.frac_X != 0) || (item.frac_Y != 0)) begin
+            if ((item.frac_X != 0) || (item.frac_Y != 0)) begin // Multiplicacion por NaN
                 $display("A ver si funciona");
+                Z_aux = {1'b0, 31'b1111_1111_1000_0000_0000_0000_0000_000}; //El DUT solo genera +NaN
             end
 
             else begin
