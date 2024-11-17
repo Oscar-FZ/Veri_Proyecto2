@@ -47,7 +47,7 @@ class scoreboard extends uvm_scoreboard;
             `uvm_error("SCBD", "Failed to create CSV file for writing")
         end
         else begin
-            $fwrite(archivo_csv, "%-10s %-5s %-12s %-12s %-12s %-12s %-5s %-5s %-5s %-5s\n", 
+            $fwrite(archivo_csv, "%-12s %-6s %-14s %-14s %-16s %-16s %-15s %-15s %-15s %-15s\n", 
             "Tiempo", "r_mode", "fp_X", "fp_Y", "fp_Z_esperado", "fp_Z_recibido", 
             "ovrf_esperado", "ovrf_recibido", "udrf_esperado", "udrf_recibido"
         );
@@ -184,18 +184,18 @@ class scoreboard extends uvm_scoreboard;
             ovrf_aux = 1'b0;
         end
 
-        $fwrite(archivo_csv, "[%-10t] %-5b %-12g %-12g %-12g %-12g %-5b %-5b %-5b %-5b\n", 
-        $time, 
-        item.r_mode, 
-        $bitstoshortreal({item.sign_X, item.exp_X, item.frac_X}), 
-        $bitstoshortreal({item.sign_Y, item.exp_Y, item.frac_Y}),
-        $bitstoshortreal(Z_aux),
-        $bitstoshortreal(item.fp_Z),
-        ovrf_aux,
-        item.ovrf,
-        udrf_aux,
-        item.udrf
-        );
+        $fwrite(archivo_csv, "[%-10t] %-6b %-14g %-14g %-16g %-16g %-15b %-15b %-15b %-15b\n", 
+                $time, 
+                item.r_mode, 
+                $bitstoshortreal({item.sign_X, item.exp_X, item.frac_X}), 
+                $bitstoshortreal({item.sign_Y, item.exp_Y, item.frac_Y}),
+                $bitstoshortreal(Z_aux),
+                $bitstoshortreal(item.fp_Z),
+                ovrf_aux,
+                item.ovrf,
+                udrf_aux,
+                item.udrf
+            );
 
         if (Z_aux != item.fp_Z) begin //TODO Evaluar caso NaN == -NaN // This seems to be fixed
             `uvm_error("SCBD", $sformatf("ERROR Z recibido = %0g Z esperado = %0g", $bitstoshortreal(item.fp_Z), $bitstoshortreal(Z_aux)))
