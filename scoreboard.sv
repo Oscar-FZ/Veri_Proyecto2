@@ -161,6 +161,7 @@ class scoreboard extends uvm_scoreboard;
         
         frac_Z = Z[24:2];
         Z_aux = {sign_Z, exp_Z, frac_Z};
+        $display("Creo que no deberia poder leer esto");
 
         //Casos Especiales
 
