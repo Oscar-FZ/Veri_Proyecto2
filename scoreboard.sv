@@ -168,28 +168,16 @@ class scoreboard extends uvm_scoreboard;
             Z_aux = {sign_Z, 31'b0000_0000_0000_0000_0000_0000_0000_000};
         end
 
-        //else if ((item.exp_X == 8'hFF) || (item.exp_Y == 8'hFF)) begin 
+        else if ((item.exp_X == 8'hFF) || (item.exp_Y == 8'hFF)) begin 
             if ((item.exp_X == 8'hFF && item.frac_X != 0) || (item.exp_Y == 8'hFF && item.frac_Y != 0) || 
             (item.exp_Y == 8'hFF && item.frac_Y != 0 && item.exp_X == 8'h00 && item.frac_X == 23'h000000) || (item.exp_X == 8'hFF && item.frac_X != 0 && item.exp_Y == 8'h00 && item.frac_Y == 23'h000000)) begin // Multiplicacion por NaN
                 Z_aux = {1'b0, 31'b1111_1111_1000_0000_0000_0000_0000_000}; //El DUT solo genera +NaN
             end
 
-            else if ((item.exp_X == 8'hFF && item.frac_X == 0) || (item.exp_Y == 8'hFF && item.frac_Y == 0)) begin //Multiplicacion por infinito
+            else begin //Multiplicacion por infinito
                 Z_aux = {sign_Z, 31'b1111_1111_0000_0000_0000_0000_0000_000};
             end
-
-            //if (((item.frac_X == 23'h000000) || (item.frac_Y == 23'h000000)) && ((item.frac_X[22] != 1'b1) || (item.frac_Y[22] != 1'b1))) begin //Multiplicacion por infinito
-                //Z_aux = {sign_Z, 31'b1111_1111_0000_0000_0000_0000_0000_000};
-                //$display("Estamos en mul infinito mi gente");
-                //$display("fracx:%0b, fracy:%0b", item.frac_X, item.frac_Y);
-            //end
-
-            //else if (((item.frac_X != 23'h000000) || (item.frac_Y != 23'h000000)) && ((item.frac_X[22] == 1'b1) || (item.frac_Y[22] == 1'b1))) begin //Multiplicacion por NaN
-                //Z_aux = {1'b0, 31'b1111_1111_1000_0000_0000_0000_0000_000}; //El DUT solo genera +NaN
-                //$display("Estamos en mul NaN mi gente");
-            //end
-            
-        //end
+        end
 
         // Separar esto en otro if/else
         if (exp_X+exp_Y >= 382) begin //Overflow 
