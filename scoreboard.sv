@@ -162,7 +162,7 @@ class scoreboard extends uvm_scoreboard;
                 Z_aux = {sign_Z, 31'b1111_1111_0000_0000_0000_0000_0000_000};
             end
 
-            else begin //Multiplicacion por NaN
+            else if ((frac_X == 23'h400000) || (frac_Y == 23'h400000)) begin //Multiplicacion por NaN
                 Z_aux = {1'b0, 31'b1111_1111_1000_0000_0000_0000_0000_000}; //El DUT solo genera +NaN
             end
         end
