@@ -47,7 +47,7 @@ class scoreboard extends uvm_scoreboard;
             `uvm_error("SCBD", "Failed to create CSV file for writing")
         end
         else begin
-            $fwrite(archivo_csv, "%-10s %-8s %-10s %-10s %-15s %-15s %-15s %-15s %-15s %-15s\n", 
+            $fwrite(archivo_csv, "%-10s %-5s %-12s %-12s %-12s %-12s %-5s %-5s %-5s %-5s\n", 
             "Tiempo", "r_mode", "fp_X", "fp_Y", "fp_Z_esperado", "fp_Z_recibido", 
             "ovrf_esperado", "ovrf_recibido", "udrf_esperado", "udrf_recibido"
         );
