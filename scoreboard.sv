@@ -164,15 +164,17 @@ class scoreboard extends uvm_scoreboard;
 
         //Casos Especiales
 
-        if ((item.exp_X == 8'h00 && item.frac_X == 23'h000000) || (item.exp_Y == 8'h00 && item.frac_Y == 23'h000000)) begin //Multiplicacion por cero
+        if ((exp_X == 8'h00 && frac_X == 23'h000000) || (exp_Y == 8'h00 && frac_Y == 23'h000000)) begin //Multiplicacion por cero
             Z_aux = {sign_Z, 31'b0000_0000_0000_0000_0000_0000_0000_000};
         end
 
-        else if ((item.exp_X == 8'hFF) || (item.exp_Y == 8'hFF)) begin 
-            if ((item.exp_X == 8'hFF && item.frac_X != 0) || (item.exp_Y == 8'hFF && item.frac_Y != 0) || 
-            (item.exp_Y == 8'hFF && item.frac_Y != 0 && item.exp_X == 8'h00 && item.frac_X == 23'h000000) || 
-            (item.exp_X == 8'hFF && item.frac_X != 0 && item.exp_Y == 8'h00 && item.frac_Y == 23'h000000)) begin // Multiplicacion por NaN
+        else if ((exp_X == 8'hFF) || (exp_Y == 8'hFF)) begin 
+            $display("Deberia poder leer esto");
+            if ((exp_X == 8'hFF && frac_X != 0) || (exp_Y == 8'hFF && frac_Y != 0) || 
+                (exp_Y == 8'hFF && frac_Y != 0 && exp_X == 8'h00 && frac_X == 23'h000000) || 
+                (exp_X == 8'hFF && frac_X != 0 && exp_Y == 8'h00 && frac_Y == 23'h000000)) begin // Multiplicacion por NaN
                 Z_aux = {1'b0, 31'b1111_1111_1000_0000_0000_0000_0000_000}; //El DUT solo genera +NaN
+                $display("Buena noticia mi gente");
             end
 
             else begin //Multiplicacion por infinito
