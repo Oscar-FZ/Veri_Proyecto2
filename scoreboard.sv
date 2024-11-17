@@ -175,8 +175,9 @@ class scoreboard extends uvm_scoreboard;
                 Z_aux = {1'b0, 31'b1111_1111_1000_0000_0000_0000_0000_000}; //El DUT solo genera +NaN
             end
 
-            else begin
+            else begin //Multiplicacion por infinito
                 $display("No deberia poder leer esto");
+                Z_aux = {sign_Z, 31'b1111_1111_0000_0000_0000_0000_0000_000};
             end
 
             //if (((item.frac_X == 23'h000000) || (item.frac_Y == 23'h000000)) && ((item.frac_X[22] != 1'b1) || (item.frac_Y[22] != 1'b1))) begin //Multiplicacion por infinito
