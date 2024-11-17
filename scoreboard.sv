@@ -10,6 +10,7 @@ class scoreboard extends uvm_scoreboard;
     shortreal X, Y;
 
     int archivo_csv;
+    int cuenta = 0;
 
     bit sign_X;
     bit sign_Y;
@@ -161,8 +162,7 @@ class scoreboard extends uvm_scoreboard;
         
         frac_Z = Z[24:2];
         Z_aux = {sign_Z, exp_Z, frac_Z};
-        $display("Creo que no deberia poder leer esto");
-
+        cuenta = cuenta + 1;
         //Casos Especiales
 
         if ((exp_X == 8'h00 && frac_X == 23'h000000) || (exp_Y == 8'h00 && frac_Y == 23'h000000)) begin //Multiplicacion por cero
@@ -175,7 +175,7 @@ class scoreboard extends uvm_scoreboard;
                 (exp_Y == 8'hFF && frac_Y != 0 && exp_X == 8'h00 && frac_X == 23'h000000) || 
                 (exp_X == 8'hFF && frac_X != 0 && exp_Y == 8'h00 && frac_Y == 23'h000000)) begin // Multiplicacion por NaN
                 Z_aux = {1'b0, 31'b1111_1111_1000_0000_0000_0000_0000_000}; //El DUT solo genera +NaN
-                $display("Buena noticia mi gente");
+                $display("Buena noticia mi gente:%0d", cuenta);
             end
 
             else begin //Multiplicacion por infinito
