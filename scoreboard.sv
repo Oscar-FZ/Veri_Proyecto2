@@ -9,7 +9,7 @@ class scoreboard extends uvm_scoreboard;
 
     shortreal X, Y;
 
-    int csv_file;
+    int archivo_csv;
 
     bit sign_X;
     bit sign_Y;
@@ -38,9 +38,21 @@ class scoreboard extends uvm_scoreboard;
 
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
-
         m_analysis_imp = new("m_analysis_imp", this);
+
+        archivo_csv = $fopen("resultados.csv", "w");
+        if (archivo_csv == 0) begin
+            `uvm_error("SCBD", "Failed to create CSV file for writing")
+        end
+        else begin
+            $fwrite(archivo_csv, "Tiempo\n");
+        end
     endfunction
+
+    virtual task final_phase(uvm_phase phase); // Por que task y no funcion?
+        super.final_phase(phase);
+        $fclose(archivo_csv);
+    endtask
 
     virtual function write(Item item);
 
@@ -177,10 +189,6 @@ class scoreboard extends uvm_scoreboard;
                 item.r_mode, $bitstoshortreal({item.sign_X, item.exp_X, item.frac_X}), $bitstoshortreal({item.sign_Y, item.exp_Y, item.frac_Y}), $bitstoshortreal(item.fp_Z), item.ovrf, item.udrf), UVM_HIGH)
 
         end
-
-       csv_file = $fopen("Resultados.csv", "w"); 
-       $fwrite(csv_file, "Prueba, Tiempo:%d;", $time);
-       $fclose(csv_file);
 
     endfunction
 endclass
