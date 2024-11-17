@@ -177,7 +177,7 @@ class scoreboard extends uvm_scoreboard;
         $time, 
         item.r_mode, 
         $bitstoshortreal({item.sign_X, item.exp_X, item.frac_X}), 
-        $bitstoshortreal({item.sign_Y, item.exp_Y, item.frac_Y})
+        $bitstoshortreal({item.sign_Y, item.exp_Y, item.frac_Y}),
         $bitstoshortreal(Z_aux),
         $bitstoshortreal(item.fp_Z));
 
