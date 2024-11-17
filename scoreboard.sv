@@ -173,7 +173,7 @@ class scoreboard extends uvm_scoreboard;
             Z_aux = Z_aux;
         end
 
-        $fwrite(archivo_csv, "[%0t], %0b", 
+        $fwrite(archivo_csv, "[%0t], %0b, %g, %g\n", 
         $time, 
         item.r_mode, 
         $bitstoshortreal({item.sign_X, item.exp_X, item.frac_X}), 
