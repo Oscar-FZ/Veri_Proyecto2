@@ -55,6 +55,23 @@ class scoreboard extends uvm_scoreboard;
         end
     endfunction
 
+    function bit obtener_flow (bit [7:0] exp1, bit [7:0] exp2);
+        if (exp_X+exp_Y >= 382) begin //Overflow 
+            ovrf_aux = 1'b1;
+            udrf_aux = 1'b0;
+        end
+        
+        else if (exp_X+exp_Y <= 127) begin //Underflow.
+            udrf_aux = 1'b1;
+            ovrf_aux = 1'b0;
+        end
+        else begin 
+            udrf_aux = 1'b0;
+            ovrf_aux = 1'b0;
+        end
+
+    endfunction
+
     virtual function void final_phase(uvm_phase phase); 
         super.final_phase(phase);
         $fclose(archivo_csv);
@@ -170,18 +187,15 @@ class scoreboard extends uvm_scoreboard;
         end
 
         else if ((exp_X == 8'hFF) || (exp_Y == 8'hFF)) begin 
-            $display("Deberia poder leer esto");
             if ((exp_X == 8'hFF && frac_X != 0) || (exp_Y == 8'hFF && frac_Y != 0) || 
                 (exp_Y == 8'hFF && frac_Y != 0 && exp_X == 8'h00 && frac_X == 23'h000000) || 
                 (exp_X == 8'hFF && frac_X != 0 && exp_Y == 8'h00 && frac_Y == 23'h000000)) begin // Multiplicacion por NaN
                 Z_aux = {1'b0, 31'b1111_1111_1000_0000_0000_0000_0000_000}; //El DUT solo genera +NaN
-                cuenta = cuenta + 1;
-                $display("Buena noticia mi gente:%0d", cuenta);
+                obtener_flow(exp_X, exp_Y);
             end
 
             else begin //Multiplicacion por infinito
                 Z_aux = {sign_Z, 31'b1111_1111_0000_0000_0000_0000_0000_000};
-                $display("Mala noticia mi gente");
             end
         end
 
