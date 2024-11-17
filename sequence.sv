@@ -11,7 +11,7 @@ class gen_item_seq extends uvm_sequence;
     rand int retardo_envio;
 
     constraint c1 {soft num inside {[10:50]};}
-    constraint c2 {soft retardo_envio inside {[100:300]};}
+    //constraint c2 {soft retardo_envio inside {[100:300]};}
 
     virtual task body();
         if (test) begin
@@ -21,6 +21,11 @@ class gen_item_seq extends uvm_sequence;
         for (int i = 0; i < num; i++) begin
             Item m_item = Item::type_id::create("m_item");
             m_item.test_s = test; // Control del sequence al sequence item
+
+            if (!this.randomize() with {retardo_envio inside {[100:300]};}) begin
+                `uvm_error("SEQ", "Error al aleatorizar el tiempo de retraso")
+            end
+
             start_item(m_item);
             m_item.randomize();
             `uvm_info("SEQ", $sformatf("Generate new item: "), UVM_HIGH)
