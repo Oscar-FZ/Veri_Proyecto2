@@ -170,12 +170,12 @@ class scoreboard extends uvm_scoreboard;
         end
 
         else if ((item.exp_X == 8'hFF) || (item.exp_Y == 8'hFF)) begin 
-            if ((item.frac_X == 23'h000000) || (item.frac_Y == 23'h000000)) begin //Multiplicacion por infinito
+            if ((item.frac_X == 23'h000000) || (item.frac_Y == 23'h000000) && (item.frac_X != 23'h400000) || (item.frac_Y != 23'h400000)) begin //Multiplicacion por infinito
                 Z_aux = {sign_Z, 31'b1111_1111_0000_0000_0000_0000_0000_000};
                 $display("Estamos en mul infinito mi gente");
             end
 
-            else begin //Multiplicacion por NaN
+            else if ((item.frac_X != 23'h000000) || (item.frac_Y != 23'h000000) && (item.frac_X == 23'h400000) || (item.frac_Y == 23'h400000)) begin //Multiplicacion por NaN
                 Z_aux = {1'b0, 31'b1111_1111_1000_0000_0000_0000_0000_000}; //El DUT solo genera +NaN
                 $display("Estamos en mul NaN mi gente");
             end
