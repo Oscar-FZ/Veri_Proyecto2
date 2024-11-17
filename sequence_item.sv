@@ -9,6 +9,7 @@ class Item extends uvm_sequence_item;
     //bit [31:0] fp_X, fp_Y;
 
     bit test_s;
+    bit c_ident;
 
     //fp_X = {sign_X, exp_X, frac_X};
     //fp_Y = {sign_Y, exp_Y, frac_Y};
@@ -47,4 +48,12 @@ class Item extends uvm_sequence_item;
     
 
     constraint c2 {r_mode inside{[0:4]};}
+
+    constraint test_ident {
+        if (c_ident) {
+            sign_X == 1'b0;
+            exp_X == 8'b01111111;
+            frac_X == 23'b0;
+        }
+    }
 endclass

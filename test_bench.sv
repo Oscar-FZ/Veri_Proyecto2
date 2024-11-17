@@ -30,6 +30,6 @@ module tb;
     initial begin
         clk <= 0;
         uvm_config_db#(virtual fpmul_if)::set(null, "uvm_test_top", "fpmul_if", _if);
-        run_test("test_fpmul");
+        run_test(); // Para pasarle el nombre desde la consola
     end
 endmodule

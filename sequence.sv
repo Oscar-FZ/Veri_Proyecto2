@@ -2,6 +2,7 @@ class gen_item_seq extends uvm_sequence;
     `uvm_object_utils(gen_item_seq)
 
     bit test;
+    bit c_ident;
 
     function new (string name = "gen_item_seq");
         super.new(name);
@@ -21,6 +22,7 @@ class gen_item_seq extends uvm_sequence;
         for (int i = 0; i < num; i++) begin
             Item m_item = Item::type_id::create("m_item");
             m_item.test_s = test; // Control del sequence al sequence item
+            m_item.c_ident = c_ident;
 
             if (!this.randomize() with {retardo_envio inside {[100:300]};}) begin
                 `uvm_error("SEQ", "Error al aleatorizar el tiempo de retraso")
