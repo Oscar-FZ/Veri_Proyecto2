@@ -83,6 +83,17 @@ class scoreboard extends uvm_scoreboard;
             frac_X = 23'b0;
         end
 
+        // Hacer lo de arriba pero con Y
+        if ((Y > 3.4028235e38) || (Y < -3.4028235e38)) begin
+            exp_Y = 8'hFF;
+            frac_Y = 23'b0;
+        end
+
+        else if (((Y < 1.1754942e-38) && (Y > 0)) || ((Y > -1.1754942e-38) && (Y < 0))) begin
+            exp_Y = 8'h00;
+            frac_Y = 23'b0;
+        end
+
         //Definicion del signo de Z
         sign_Z = sign_X ^ sign_Y;
         
