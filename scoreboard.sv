@@ -33,6 +33,8 @@ class scoreboard extends uvm_scoreboard;
     bit [23:0] Z_round;
 
     bit [31:0] Z_aux;
+    bit ovrf_aux;
+    bit udrf_aux;
 
     uvm_analysis_imp #(Item, scoreboard) m_analysis_imp;
 
@@ -45,7 +47,7 @@ class scoreboard extends uvm_scoreboard;
             `uvm_error("SCBD", "Failed to create CSV file for writing")
         end
         else begin
-            $fwrite(archivo_csv, "Tiempo, r_mode, fp_X, fp_Y, fp_Z_esperado, fp_Z_recibido\n");
+            $fwrite(archivo_csv, "Tiempo, r_mode, fp_X, fp_Y, fp_Z_esperado, fp_Z_recibido, ovrf_esperado, ovrf_recibido, udrf_esperado, udrf_recibido\n");
         end
     endfunction
 
@@ -164,22 +166,29 @@ class scoreboard extends uvm_scoreboard;
 
         else if (exp_X+exp_Y >= 382) begin //Overflow 
             Z_aux = {sign_Z, 31'b1111_1111_0000_0000_0000_0000_0000_000};
+            ovrf_aux = 1'b1;
         end
         
         else if (exp_X+exp_Y <= 127) begin //Underflow.
             Z_aux = {sign_Z, 31'b0000_0000_0000_0000_0000_0000_0000_000};
+            udrf_aux = 1'b1;
         end
         else begin 
             Z_aux = Z_aux;
         end
 
-        $fwrite(archivo_csv, "[%0t], %0b, %0g, %0g, %0g, %0g\n", 
+        $fwrite(archivo_csv, "[%0t], %0b, %0g, %0g, %0g, %0g, %0b, %0b, %0b, %0b\n", 
         $time, 
         item.r_mode, 
         $bitstoshortreal({item.sign_X, item.exp_X, item.frac_X}), 
         $bitstoshortreal({item.sign_Y, item.exp_Y, item.frac_Y}),
         $bitstoshortreal(Z_aux),
-        $bitstoshortreal(item.fp_Z));
+        $bitstoshortreal(item.fp_Z),
+        ovrf_aux,
+        item.ovrf,
+        udrf_aux,
+        item.udrf
+        );
 
         if (Z_aux != item.fp_Z) begin //TODO Evaluar caso NaN == -NaN // This seems to be fixed
             `uvm_error("SCBD", $sformatf("ERROR Z recibido = %0g Z esperado = %0g", $bitstoshortreal(item.fp_Z), $bitstoshortreal(Z_aux)))
