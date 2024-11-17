@@ -167,17 +167,21 @@ class scoreboard extends uvm_scoreboard;
         else if (exp_X+exp_Y >= 382) begin //Overflow 
             Z_aux = {sign_Z, 31'b1111_1111_0000_0000_0000_0000_0000_000};
             ovrf_aux = 1'b1;
+            udrf_aux = 1'b0;
         end
         
         else if (exp_X+exp_Y <= 127) begin //Underflow.
             Z_aux = {sign_Z, 31'b0000_0000_0000_0000_0000_0000_0000_000};
             udrf_aux = 1'b1;
+            ovrf_aux = 1'b0;
         end
         else begin 
             Z_aux = Z_aux;
+            udrf_aux = 1'b0;
+            ovrf_aux = 1'b0;
         end
 
-        $fwrite(archivo_csv, "[%0t], %0b, %0g, %0g, %0g, %0g, %0b, %0b, %0b, %0b\n", 
+        $fwrite(archivo_csv, "[%-10t] %-5b %-12g %-12g %-12g %-12g %-5b %-5b %-5b %-5b\n", 
         $time, 
         item.r_mode, 
         $bitstoshortreal({item.sign_X, item.exp_X, item.frac_X}), 
