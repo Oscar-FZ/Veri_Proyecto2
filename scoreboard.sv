@@ -47,7 +47,7 @@ class scoreboard extends uvm_scoreboard;
             `uvm_error("SCBD", "Failed to create CSV file for writing")
         end
         else begin
-            $fwrite(archivo_csv, "%-12s %-6s %-14s %-14s %-16s %-16s %-15s %-15s %-15s %-15s\n", 
+            $fwrite(archivo_csv, "%-12s %-8s %-14s %-16s %-16s %-16s %-15s %-15s %-15s %-15s\n", 
             "Tiempo", "r_mode", "fp_X", "fp_Y", "fp_Z_esperado", "fp_Z_recibido", 
             "ovrf_esperado", "ovrf_recibido", "udrf_esperado", "udrf_recibido"
         );
@@ -166,6 +166,8 @@ class scoreboard extends uvm_scoreboard;
                 Z_aux = {1'b0, 31'b1111_1111_1000_0000_0000_0000_0000_000}; //El DUT solo genera +NaN
             end
         end
+
+        // ARREGLAR LO DEL EXPONENTE
 
         else if (exp_X+exp_Y >= 382) begin //Overflow 
             Z_aux = {sign_Z, 31'b1111_1111_0000_0000_0000_0000_0000_000};
