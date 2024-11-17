@@ -49,10 +49,10 @@ class scoreboard extends uvm_scoreboard;
         end
     endfunction
 
-    virtual task final_phase(uvm_phase phase); // Por que task y no funcion?
+    virtual function void final_phase(uvm_phase phase); // Por que task y no funcion?
         super.final_phase(phase);
         $fclose(archivo_csv);
-    endtask
+    endfunction
 
     virtual function write(Item item);
 
