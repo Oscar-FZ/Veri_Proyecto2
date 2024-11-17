@@ -28,9 +28,6 @@ class Item extends uvm_sequence_item;
     `uvm_object_utils_end*/
 
     virtual function string print();
-        if (test_s) begin
-            $display("Test still worked lmao");
-        end
         return $sformatf("fp_X = %h, fp_Y = %h, fp_Z = %h, R_mode = %h, Ovrf = %h, Udrf = %h", {sign_X, exp_X, frac_X}, {sign_Y, exp_Y, frac_Y}, fp_Z, r_mode, ovrf, udrf);
     endfunction
 

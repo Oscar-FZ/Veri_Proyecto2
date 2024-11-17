@@ -15,10 +15,6 @@ class gen_item_seq extends uvm_sequence;
     //constraint c2 {soft retardo_envio inside {[100:300]};}
 
     virtual task body();
-        if (test) begin
-            $display("Test worked lmao");
-        end
-
         for (int i = 0; i < num; i++) begin
             Item m_item = Item::type_id::create("m_item");
             m_item.test_s = test; // Control del sequence al sequence item

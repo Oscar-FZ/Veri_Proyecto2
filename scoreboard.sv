@@ -175,7 +175,7 @@ class scoreboard extends uvm_scoreboard;
                 $display("Estamos en mul infinito mi gente");
             end
 
-            else if ((item.frac_X == 23'h400000) || (item.frac_Y == 23'h400000)) begin //Multiplicacion por NaN
+            else begin //Multiplicacion por NaN
                 Z_aux = {1'b0, 31'b1111_1111_1000_0000_0000_0000_0000_000}; //El DUT solo genera +NaN
                 $display("Estamos en mul NaN mi gente");
             end
