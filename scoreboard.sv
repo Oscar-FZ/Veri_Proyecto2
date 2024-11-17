@@ -173,7 +173,7 @@ class scoreboard extends uvm_scoreboard;
             Z_aux = Z_aux;
         end
 
-    
+        $fwrite(archivo_csv, "%0t", $time);
 
         if (Z_aux != item.fp_Z) begin //TODO Evaluar caso NaN == -NaN // This seems to be fixed
             `uvm_error("SCBD", $sformatf("ERROR Z recibido = %0g Z esperado = %0g", $bitstoshortreal(item.fp_Z), $bitstoshortreal(Z_aux)))
