@@ -11,7 +11,7 @@ class gen_item_seq extends uvm_sequence;
     rand int num;
     rand int retardo_envio;
 
-    constraint c1 {soft num inside {[50:100]};}
+    constraint c1 {soft num inside {[100:200]};}
     //constraint c2 {soft retardo_envio inside {[100:300]};}
 
     virtual task body();
