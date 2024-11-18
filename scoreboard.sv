@@ -219,7 +219,7 @@ class scoreboard extends uvm_scoreboard;
             ovrf_aux = 1'b0;
         end
 
-        $fwrite(archivo_csv, "[%-10t] %-6b %-14g %-14g %-16g %-16g %-15b %-15b %-15b %-15b\n", 
+        $fwrite(archivo_csv, "%-12t %-6b %-14g %-14g %-16g %-16g %-17g %-15g %-15g %-15g\n", 
                 $time, 
                 item.r_mode, 
                 $bitstoshortreal({item.sign_X, item.exp_X, item.frac_X}), 
