@@ -19,16 +19,6 @@ class Item extends uvm_sequence_item;
     bit [31:0] fp_Z;
     bit ovrf, udrf;
 
-    //Registro de los atributos para usar las funciones de los macros de campo
-    `uvm_object_utils_begin(Item)
-        `uvm_field_int (r_mode, UVM_DEFAULT)
-        `uvm_field_int (fp_X, UVM_DEFAULT)
-        `uvm_field_int (fp_Y, UVM_DEFAULT)
-        `uvm_field_int (fp_Z, UVM_DEFAULT)
-        `uvm_field_int (ovrf, UVM_DEFAULT)
-        `uvm_field_int (udrf, UVM_DEFAULT)
-    `uvm_object_utils_end
-
     virtual function string print();
         return $sformatf("fp_X = %h, fp_Y = %h, fp_Z = %h, R_mode = %h, Ovrf = %h, Udrf = %h", {sign_X, exp_X, frac_X}, {sign_Y, exp_Y, frac_Y}, fp_Z, r_mode, ovrf, udrf);
     endfunction
