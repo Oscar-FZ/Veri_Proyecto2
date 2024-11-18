@@ -1,3 +1,4 @@
+// Importa los archivos de UVM y del entorno desarrollado
 import uvm_pkg::*;
 `include "uvm_macros.svh"
 `include "multiplicador_32_bits_FP_IEEE.sv"
@@ -11,10 +12,10 @@ import uvm_pkg::*;
 `include "ambiente.sv"
 `include "test.sv"
 module tb; 
-    reg clk;
+    reg clk; // Reloj para el dut
 
-    always #10 clk =~ clk;
-    fpmul_if _if(clk);
+    always #10 clk =~ clk; // Genera la sennal de reloj
+    fpmul_if _if(clk); // Instancia la interfaz con el reloj
 
     top u0 
     (
@@ -28,8 +29,8 @@ module tb;
     );
 
     initial begin
-        clk <= 0;
-        uvm_config_db#(virtual fpmul_if)::set(null, "uvm_test_top", "fpmul_if", _if);
+        clk <= 0; // Inicializa la sennal del reloj
+        uvm_config_db#(virtual fpmul_if)::set(null, "uvm_test_top", "fpmul_if", _if); // Configura la interfaz virtual en el configdb
         run_test(); // Para pasarle el nombre desde la consola
     end
 endmodule

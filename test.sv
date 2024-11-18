@@ -1,57 +1,62 @@
 class base_test extends uvm_test;
-    `uvm_component_utils(base_test)
+    `uvm_component_utils(base_test) // Registra la clase en la fabrica
 
+    // Constructor de la clase
     function new(string name = "base_test", uvm_component parent = null);
         super.new(name, parent);
     endfunction
 
-    env e0;
-    gen_item_seq seq;
-    virtual fpmul_if vif;
+    env e0;               // Instancia del entorno de verificacion
+    gen_item_seq seq;     // Instancia de la secuencia
+    virtual fpmul_if vif; // Instancia de la interfaz virtual
 
+    // Construccion de los componentes
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
 
-        e0 = env::type_id::create("e0", this);
+        e0 = env::type_id::create("e0", this); // Crea la instancia del entorno
 
         if (!uvm_config_db#(virtual fpmul_if)::get(this, "", "fpmul_if", vif))
-            `uvm_fatal("TEST", "Did not get vif")
-        uvm_config_db#(virtual fpmul_if)::set(this, "e0.a0.*", "fpmul_if", vif);
+            `uvm_fatal("TEST", "Did not get vif") // Error si no se encuentra la interfaz
+
+        uvm_config_db#(virtual fpmul_if)::set(this, "e0.a0.*", "fpmul_if", vif); // Configura la interfaz
         
+        // Crea y aleatoriza la secuencia
         seq = gen_item_seq::type_id::create("seq");
         seq.randomize();
     endfunction
 
+    // Fase de corrida de la prueba
     virtual task run_phase(uvm_phase phase);
-        phase.raise_objection(this);
-        apply_reset();
-        seq.start(e0.a0.s0);
-        #200;
-        phase.drop_objection(this);
+        phase.raise_objection(this); // Levanta la objecion para mantener la simulacion activa
+        apply_reset(); // Reinicia el DUT
+        seq.start(e0.a0.s0); // Inicia la secuencia de items
+        #200; // Espera 200 unidades de tiempo
+        phase.drop_objection(this); // Baja la objecion y termina la simulacion
     endtask
 
-    virtual task apply_reset(); //TODO ACTUALIZAR
+    virtual task apply_reset(); //Reinicia el DUT
         vif.rstn <= 0;
         vif.r_mode <= 0;
         vif.fp_X <= 0;
         vif.fp_Y <= 0;
-        repeat(5) @(posedge vif.clk);
+        repeat(5) @(posedge vif.clk); // Mantiene el reset por 5 ciclos
         vif.rstn <= 1;
         repeat(10) @(posedge vif.clk);
     endtask
 endclass
 
 class test_fpmul extends base_test;
-    `uvm_component_utils(test_fpmul)
+    `uvm_component_utils(test_fpmul) // Registra la clase en la fabrica
 
+    // Constructor de la clase
     function new(string name = "test_fpmul", uvm_component parent = null);
         super.new(name, parent);
     endfunction
 
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
-        seq.randomize() with {num inside {[50: 80]};};
-        seq.test = 1;
+        seq.randomize() with {num inside {[50: 80]};}; //Aleatoriza la secuencia
     endfunction
 endclass
 
@@ -65,7 +70,7 @@ class test_ident extends base_test;
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
         seq.randomize();
-        seq.c_ident = 1;
+        seq.c_ident = 1; // Establece el valor de c_ident
     endfunction
 endclass
 
