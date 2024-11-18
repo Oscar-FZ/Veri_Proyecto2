@@ -32,28 +32,32 @@ class Item extends uvm_sequence_item;
     constraint c2 {r_mode inside{[0:4]};} // Restriccion para el r_mode
 
     // Restricciones para los casos de prueba
+    // El valor de X es 1
     constraint test_ident {
-        if (c_ident) {
+        if (c_ident) { 
             sign_X == 1'b0;
             exp_X == 8'b01111111;
             frac_X == 23'b0;
         }
     }
 
-    constraint test_cero {
+    // El valor de Y es 0
+    constraint test_cero { 
         if (c_cero) {
             exp_Y == 8'b0;
             frac_Y == 23'b0;
         }
     }
 
-    constraint test_nxi {
+    // El valor de X es infinito
+    constraint test_nxi { 
         if (c_nxi) {
             exp_X == 8'hFF;
             frac_X == 23'b0;
         }
     }
 
+    // El valor de Y es NaN
     constraint test_nan {
         if (c_nan) {
             exp_Y == 8'hFF;
@@ -61,6 +65,7 @@ class Item extends uvm_sequence_item;
         }
     }
 
+    // ExpX + ExpY causa overflow
     constraint test_ovrf {
         if (c_ovrf) {
             exp_X >= 8'b10111111;
@@ -70,6 +75,7 @@ class Item extends uvm_sequence_item;
         }
     }
 
+    // ExpX + ExpY causa underflow
     constraint test_udrf{
         if (c_udrf) {
             exp_X >= 0;
