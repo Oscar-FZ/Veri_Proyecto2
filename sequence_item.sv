@@ -1,13 +1,13 @@
 class Item extends uvm_sequence_item;
-    `uvm_object_utils(Item)
+    `uvm_object_utils(Item) // Registra la clase en la fabrica
 
     //Inputs
-    rand bit [2:0] r_mode;
-    rand bit sign_X, sign_Y;
-    rand bit [7:0] exp_X, exp_Y;
-    rand bit [22:0] frac_X, frac_Y;
+    rand bit [2:0] r_mode;          // Modo de redondeo
+    rand bit sign_X, sign_Y;        // Signo de X y Y
+    rand bit [7:0] exp_X, exp_Y;    // Exponente de X y Y
+    rand bit [22:0] frac_X, frac_Y; // Fraccion de X y Y
 
-    bit test_s;
+    // Variables para el control de los constraints
     bit c_ident;
     bit c_cero;
     bit c_nxi;
@@ -16,20 +16,22 @@ class Item extends uvm_sequence_item;
     bit c_udrf;
 
     //Outputs
-    bit [31:0] fp_Z;
-    bit ovrf, udrf;
+    bit [31:0] fp_Z; // Resultado de la multiplicacion
+    bit ovrf, udrf;  // Overflow, Underflow
 
+    // Funcion para imprimir el contenido del item
     virtual function string print();
         return $sformatf("fp_X = %h, fp_Y = %h, fp_Z = %h, R_mode = %h, Ovrf = %h, Udrf = %h", {sign_X, exp_X, frac_X}, {sign_Y, exp_Y, frac_Y}, fp_Z, r_mode, ovrf, udrf);
     endfunction
 
-    //Funcion constructora
+    // Constructor de la clase
     function new(string name = "Item");
         super.new(name);
     endfunction
     
-    constraint c2 {r_mode inside{[0:4]};}
+    constraint c2 {r_mode inside{[0:4]};} // Restriccion para el r_mode
 
+    // Restricciones para los casos de prueba
     constraint test_ident {
         if (c_ident) {
             sign_X == 1'b0;
