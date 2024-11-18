@@ -1,22 +1,25 @@
 class monitor extends uvm_monitor;
-    `uvm_component_utils(monitor)
+    `uvm_component_utils(monitor) // Registra la clase en la fabrica
 
+    // Constructor de la clase
     function new(string name = "monitor", uvm_component parent = null);
         super.new(name, parent);
     endfunction
 
-    uvm_analysis_port #(Item) mon_analysis_port;
-    virtual fpmul_if vif;
+    uvm_analysis_port #(Item) mon_analysis_port; // Puerto de analisis para enviar lo que sale del dut
+    virtual fpmul_if vif; // Interfaz virtual para interactuar con el dut
 
-    Item item_anterior;
+    Item item_anterior; // Variable para almacenar items observados
 
+    // Construye los componentes del monitor
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
         if (!uvm_config_db#(virtual fpmul_if)::get(this, "", "fpmul_if", vif))
-            `uvm_fatal("MON", "Could not get vif")
-        mon_analysis_port = new("mon_analysis_port", this);
+            `uvm_fatal("MON", "Could not get vif") // Error si la interfaz no se encuentra en el configdb
+        mon_analysis_port = new("mon_analysis_port", this); // Crea el puerto de analisis
     endfunction
 
+    // Funcion para comparar dos items y determinar si son iguales
     function bit comparar_items (Item actual, Item anterior);
         return (actual.r_mode == anterior.r_mode &&
                 actual.sign_X == anterior.sign_X &&
@@ -31,14 +34,16 @@ class monitor extends uvm_monitor;
             );
     endfunction
 
+    // Empieza a correr el monitor
     virtual task run_phase(uvm_phase phase);
         super.run_phase(phase);
 
-        forever begin
-            @(vif.cb);
+        forever begin // Bucle infinito
+            @(vif.cb); // Actualiza cada ciclo de reloj
                 if(vif.rstn) begin
-                    Item item = Item::type_id::create("item");
-                    //Item item = new;/
+                    Item item = Item::type_id::create("item"); // Crea un nuevo item
+
+                    // Captura las sennales y las almacena en itel
                     item.r_mode = vif.r_mode;
                     item.sign_X = vif.fp_X[31];
                     item.exp_X = vif.fp_X[30:23];
@@ -47,16 +52,15 @@ class monitor extends uvm_monitor;
                     item.exp_Y = vif.fp_Y[30:23];
                     item.frac_Y = vif.fp_Y[22:0];
                     
-                    //item.fp_X = vif.fp_X;
-                    //item.fp_Y = vif.fp_Y;
                     item.fp_Z = vif.fp_Z;
                     item.ovrf = vif.ovrf;
                     item.udrf = vif.udrf;
 
+                    // Envia el item por el puerto de analisis si es diferente del ultimo observado
                     if (item_anterior == null || !comparar_items(item, item_anterior)) begin
                         mon_analysis_port.write(item);
                         `uvm_info("MON", $sformatf("Saw item: %s", item.print()), UVM_HIGH)
-                        item_anterior = item;
+                        item_anterior = item; // Actualiza el ultimo item observado
                     end
                end
         end
