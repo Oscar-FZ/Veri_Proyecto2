@@ -24,6 +24,7 @@ class driver extends uvm_driver #(Item);
             `uvm_info("DRV", $sformatf("Wait for item from sequencer"), UVM_HIGH)
             seq_item_port.get_next_item(m_item); // Espera la transaccion
             drive_item(m_item);                  // Envia la transaccion
+            $display("delay:%d", m_item.delay);
             seq_item_port.item_done();           // Finaliza la transaccion
         end
     endtask
@@ -31,6 +32,7 @@ class driver extends uvm_driver #(Item);
     // Envía la transacción a las entradas del dut
     virtual task drive_item(Item m_item);
         @(vif.cb); // Usa el reloj como sincronizacion
+            #(m_item.delay);
             vif.cb.r_mode <= m_item.r_mode;
             vif.cb.fp_X <= {m_item.sign_X, m_item.exp_X, m_item.frac_X};
             vif.cb.fp_Y <= {m_item.sign_Y, m_item.exp_Y, m_item.frac_Y};

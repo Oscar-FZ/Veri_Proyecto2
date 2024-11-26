@@ -41,7 +41,7 @@ class gen_item_seq extends uvm_sequence;
             `uvm_info("SEQ", $sformatf("Generate new item: "), UVM_HIGH)
             m_item.print();
             finish_item(m_item); // Finaliza el item
-            #retardo_envio; // Aplica el retardo del envio
+            //#retardo_envio; // Aplica el retardo del envio
         end
         `uvm_info("SEQ", $sformatf("Done generation of %0d items", num), UVM_LOW)
     endtask

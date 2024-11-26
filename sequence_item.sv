@@ -6,6 +6,7 @@ class Item extends uvm_sequence_item;
     rand bit sign_X, sign_Y;        // Signo de X y Y
     rand bit [7:0] exp_X, exp_Y;    // Exponente de X y Y
     rand bit [22:0] frac_X, frac_Y; // Fraccion de X y Y
+    rand int delay;
 
     // Variables para el control de los constraints
     bit c_ident;
@@ -28,6 +29,8 @@ class Item extends uvm_sequence_item;
     function new(string name = "Item");
         super.new(name);
     endfunction
+
+    constraint c_delay {delay inside {[100:500]};} // Restriccion para el tiempo de retardo
     
     constraint c2 {r_mode inside{[0:4]};} // Restriccion para el r_mode
 
