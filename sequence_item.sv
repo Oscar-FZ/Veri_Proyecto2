@@ -67,7 +67,7 @@ class Item extends uvm_sequence_item;
                 exp_X != 8'b00000000;
             }
 
-            if (exp_Y != 8'b00000000) {
+            else if (exp_Y != 8'b00000000) {
                 frac_X == 23'b0;
                 exp_X == 8'b00000000;
             }
@@ -78,12 +78,9 @@ class Item extends uvm_sequence_item;
     constraint test_nxi { 
         if (c_nxi) {
             exp_X dist {8'hFF := 50, [8'b0000_0000:8'b1111_1110] :/ 50};
-            //exp_X == 8'hFF;
             frac_X dist {23'b0 := 50, [23'h1:23'h7fffff] :/ 50};
-            //frac_X == 23'b0;
 
             exp_Y dist {8'hFF := 50, [8'b0000_0000:8'b1111_1110] :/ 50};
-            //exp_X == 8'hFF;
             frac_Y dist {23'b0 := 50, [23'h1:23'h7fffff] :/ 50};
 
             if (exp_X == 8'hFF) {
@@ -91,18 +88,30 @@ class Item extends uvm_sequence_item;
                 exp_Y != 8'hFF;
             }
 
-            if (exp_X != 8'hFF) {
+            else if (exp_X != 8'hFF) {
                 frac_Y == 23'b0;
                 exp_Y == 8'hFF;
             }
         }
     }
 
-    // El valor de Y es NaN
+    // Se multiplican los valores generados aleatoriamente por NaN
     constraint test_nan {
         if (c_nan) {
-            exp_Y == 8'hFF;
+            exp_Y dist {8'hFF := 50, [8'b0000_0000:8'b1111_1110] :/ 50};
+            //exp_Y == 8'hFF;
             frac_Y > 0;
+
+            exp_X dist {8'hFF := 50, [8'b0000_0000:8'b1111_1110] :/ 50};
+            frac_X > 0;
+
+            if (exp_Y == 8'hFF) {
+                exp_X != 8'hFF;
+            }
+
+            else if (exp_Y != 8'hFF) {
+                exp_X == 8'hFF;
+            }
         }
     }
 
