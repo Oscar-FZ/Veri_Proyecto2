@@ -56,8 +56,23 @@ class Item extends uvm_sequence_item;
     // El valor de Y es 0
     constraint test_cero { 
         if (c_cero) {
-            exp_Y == 8'b0;
-            frac_Y == 23'b0;
+            exp_Y dist {8'b00000000 := 50, [8'b0000_0001:8'b1111_1110] :/ 50};
+            //exp_Y == 8'b0;
+            frac_Y dist {23'b0 := 50, [23'h1:23'h7fffff] :/ 50};
+            //frac_Y == 23'b0;
+
+            exp_X dist {8'b00000000 := 50, [8'b0000_0001:8'b1111_1110] :/ 50};
+            frac_X dist {23'b0 := 50, [23'h1:23'h7fffff] :/ 50};
+
+            if (exp_Y == 8'b00000000) {
+                frac_Y == 23'b0;
+                exp_X != 8'b00000000;
+            }
+
+            if (exp_Y != 8'b00000000) {
+                frac_X == 23'b0;
+                exp_X == 8'b00000000;
+            }
         }
     }
 
