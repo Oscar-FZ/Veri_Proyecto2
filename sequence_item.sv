@@ -34,8 +34,7 @@ class Item extends uvm_sequence_item;
     // Restricciones para los casos de prueba
     // El valor de X es 1
     constraint test_ident {
-        if (c_ident) { 
-            sign_X == 1'b0;
+        if (c_ident) {sign_X dist {1'b0 := 70, 1'b1 := 50};
             exp_X == 8'b01111111;
             frac_X == 23'b0;
         }
