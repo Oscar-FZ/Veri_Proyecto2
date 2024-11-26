@@ -45,6 +45,10 @@ class Item extends uvm_sequence_item;
             if (exp_X == 8'b01111111) {
                 exp_Y != 8'b01111111;
             }
+
+            else if (exp_X != 8'b01111111) {
+                exp_Y == 8'b01111111;
+            }
         }
     }
 
