@@ -32,15 +32,14 @@ class Item extends uvm_sequence_item;
     constraint c2 {r_mode inside{[0:4]};} // Restriccion para el r_mode
 
     // Restricciones para los casos de prueba
-    // El valor de X es 1
+    // Se multiplican los valores generados aleatoriamente por 1
     constraint test_ident {
         if (c_ident) {
             sign_X dist {1'b0 := 50, 1'b1 := 50};
             exp_X dist {8'b01111111 := 50, [8'b0:8'b01111110] :/ 100};
-            //frac_X == 23'b0;
+
             sign_Y dist {1'b0 := 50, 1'b1 := 50};
             exp_Y dist {8'b01111111 := 50, [8'b0:8'b01111110] :/ 100};
-            //frac_Y == 23'b0;
 
             if (exp_X == 8'b01111111) {
                 frac_X == 23'b0;
@@ -48,7 +47,7 @@ class Item extends uvm_sequence_item;
             }
 
             else if (exp_X != 8'b01111111) {
-                frac_Y = 23'b0;
+                frac_Y == 23'b0;
                 exp_Y == 8'b01111111;
             }
         }
