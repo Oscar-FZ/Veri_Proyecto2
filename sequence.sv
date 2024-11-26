@@ -16,7 +16,6 @@ class gen_item_seq extends uvm_sequence;
 
     // Variables para aleatorizar el numero de items y el retardo en el envio
     rand int num;
-    rand int retardo_envio;
 
     constraint c1 {soft num inside {[100:200]};} // Constraint del numero de pruebas
 
@@ -31,17 +30,11 @@ class gen_item_seq extends uvm_sequence;
             m_item.c_ovrf = c_ovrf;
             m_item.c_udrf = c_udrf;
 
-            // Aleatoriza el tiempo de retardo antes de enviar el item
-            if (!this.randomize() with {retardo_envio inside {[100:300]};}) begin
-                `uvm_error("SEQ", "Error al aleatorizar el tiempo de retraso")
-            end
-
             start_item(m_item); // Inicia el item para enviarlo al secuenciador
             m_item.randomize(); // Aleatoriza el item
             `uvm_info("SEQ", $sformatf("Generate new item: "), UVM_HIGH)
             m_item.print();
             finish_item(m_item); // Finaliza el item
-            //#retardo_envio; // Aplica el retardo del envio
         end
         `uvm_info("SEQ", $sformatf("Done generation of %0d items", num), UVM_LOW)
     endtask
