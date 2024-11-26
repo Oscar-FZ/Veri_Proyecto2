@@ -36,11 +36,15 @@ class Item extends uvm_sequence_item;
     constraint test_ident {
         if (c_ident) {
             sign_X dist {1'b0 := 70, 1'b1 := 50};
-            exp_X dist {8'b01111111 := 50, [8'b0:8'b01111110] :/ 100};
+            exp_X dist {8'b01111111 := 50, [8'b0:8'b01111110] :/ 50};
             frac_X == 23'b0;
             sign_Y dist {1'b0 := 70, 1'b1 := 50};
-            exp_Y dist {8'b01111111 := 50, [8'b0:8'b01111110] :/ 100};
+            exp_Y dist {8'b01111111 := 50, [8'b0:8'b01111110] :/ 70};
             frac_Y == 23'b0;
+
+            if (exp_X == 8'b01111111) {
+                exp_Y != 8'b01111111;
+            }
         }
     }
 
